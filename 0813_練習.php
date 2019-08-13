@@ -16,11 +16,22 @@
         <tr>
             <?php for ($j = 1; $j < 10; $j++) { ?>
             <td>
-                <?php echo $i*$j?>
+                <?php echo $i * $j ?>
             </td>
             <?php } ?>
         </tr>
         <?php } ?>
+    </table>
+    <table border="1">
+        <!-- 打完php後要空一格也，接ｅｃｈｏ的時候可以用？＝ -->
+        <?php for ($i = 1; $i < 10; $i++) {
+            echo "
+        <tr>
+            <td>
+                  $i
+            </td>
+        </tr>";
+        } ?>
     </table>
 
 
