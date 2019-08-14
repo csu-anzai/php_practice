@@ -26,7 +26,7 @@
         <!-- 打完php後要空一格也，接ｅｃｈｏ的時候可以用？＝ -->
         <?php for ($i = 1; $i < 10; $i++) {
             echo "
-        <tr>
+        <>
             <td>
                   $i
             </td>
@@ -36,8 +36,8 @@
 
 
 
-    <?php
-    define('abc', 333); //常數定義法
+    <?php 
+    define('a bc', 333); //常數定義法
     $a = 22; //變數定義
     echo (7 + 9);
     echo '<br>';
@@ -47,13 +47,15 @@
     echo __FILE__;
     //完整路徑
     echo '<br>';
+    $abc = 12;
     echo __LINE__ . '<br>'; //串字串用.
-    echo abc . '<br>';
+    echo $abc . '<br>';
     //第幾行
     //除錯要往前看
     $str = 'qwert'; //單純字串用單引號
     $str2 = "qwertt $str"; //有變數要用雙引號
     echo " $str <br> $str2";
+    echo   $abc+'a';
     ?>
 </body>
 
