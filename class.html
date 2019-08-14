@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="info"></div>
+    <script>
+        let info = document.querySelector('#info');
+        class Person {
+            constructor(name = 'noName', age = 20) {
+                this.name = name;
+                this.age = age;
+            }
+            toJson() {
+                let obj = {
+                    name: this.name,
+                    age: this.age,
+                };
+                return JSON.stringify(obj);
+            }
+        }
+
+        let p1 = new Person('bill', 25);
+        let p2 = new Person('david', 30);
+        let p3 = new Person();
+
+        info.innerHTML += p3.toJson() + '<br>';
+        info.innerHTML += p1.toJson() + '<br>';
+        info.innerHTML += typeof p1 + '<br>';
+        info.innerHTML += (p1 instanceof Person) + '<br>';
+    </script>
+</body>
+
+</html>
