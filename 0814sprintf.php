@@ -58,7 +58,8 @@
             <?php for ($j = 1; $j < 10; $j++) { ?>
             <!-- 每個tr迴圈跑10個td -->
             <td>
-                <?php echo "$i * $j = " . $i * $j ?>
+                <?php printf('%s*%s=%s' ,$i,$j,$i*$j) ?>
+                <!--　印出來 -->
             </td>
             <?php } ?>
         </tr>
@@ -72,7 +73,8 @@
             <?php for ($j = 1; $j < 10; $j++) : ?>
             <!-- 每個tr迴圈跑10個td -->
             <td>
-                <?php echo "$i * $j = " . $i * $j ?>
+            <?php echo sprintf('%s*%s=%s' ,$i,$j,$i*$j) ?>
+            <!-- 回傳的是值所以要有echo -->
             </td>
             <?php endfor ?>
         </tr>
