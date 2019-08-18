@@ -67,9 +67,13 @@ $ar[可以放索引值就是KEY]="abc";事後指定進去陣列
 <?php foreach($other_article as $list):?>
 <?php endforeach;?>帶有FOR迴圈的感覺
 
+//////常用
+
 $length = strlen('asdasd');取的字元長度 
 
 中文字串佔3位元
+
+$length = mb_strlen('asdasd'); 中文字數
 
 substr($str,0,3) = splice(0,3) 從0取三碼
 
@@ -77,9 +81,34 @@ mb_substr($str,0,3)抓中文的
 
 str_replace("","",$str)置換內容(置換的內容,對象內容,對象)
 
+strtoupper();變大寫
+
+strtolower();變小寫
+
+strpos(要找的內容,"要找的值")第幾個位置式和索引值一樣用在找關鍵字(秀出第一個而已)找不到空白false
+
+mb_strpos(要找的內容,"要找的值")找中文的上面的會找中文字的字元一個中文字3字元
+
+round();4捨誤入
+
+rand($min,$mix);亂數找出
+
+array_push(目標,加入的內容,加入的內容,加入的內容);加入多個值
+array[]=值;
+
+count(陣列變數);計算裡面的數量
+
+sort(陣列變數);重新排列陣列內容小到大
+
+rsort(陣列變數);重新排列陣列內容大到小
+
+join("想加入的東西",陣列變數);陣列輸出成字串並且中間加上加入的東西
+
 date("");日期方法
 
+POST:資料不會顯示在網址列,常用在帳號密碼
 
+GET:資料會顯示在網紙業,常用在查詢和不需要保密的情況,
 
 
 
