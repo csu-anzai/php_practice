@@ -1,0 +1,106 @@
+0818	 
+
+echo 印字串整數;
+
+字串連接用.
+
+&nbsp;空白
+
+/* */多行註解
+
+//單行註解
+
+單純字串用或者是HTML用''
+
+在PHP裡面雙引號可以顯示出HTML 和 變數 但是變數建議要用{}包起來 不然就要空一格
+
+syntax error語法有問題寫錯
+
+4捨5入語法 round(變數);
+
+變數型態都印出來var_dump(內容);  debug用
+
+陣列印出 print_r();
+
+陣列的表示法和java不一樣array();
+
+抓出陣列值$PASTA = ARRAY() -> echo $pasta[數字];
+
+$pasta[數字] = a 改變陣列裡的變數的值
+
+unset($pasta[數字]);把陣列裡的索引值內容刪除 只要是變數都可以不一定只有索引值
+
+!==  不等於型態也不等於
+
+true 1 輸出1
+
+false 0 輸出空白
+
+不同寫法
+if(判別式):
+else:
+endif;
+
+switch(值){
+	case " " :判斷值是否等於
+	echo " " ;動作
+	break;    跳出
+}
+
+重複做事情for($a;$a<=10;$a++){
+	echo " ";
+}
+
+while(判別式){}
+
+foreach(陣列變數 as $key索引值的意思 => value值){}抓出陣列每個東西 
+
+foreach(陣列變數 as $value值)這樣寫也可以$value['屬性']
+
+foreach(陣列變數 as $key索引值)不能這樣寫會和上面拿到的是值不會拿到索引
+
+
+$ar = array{ 0 => "a"};手動指定鎖引值(關聯式陣列)
+
+$ar[可以放索引值就是KEY]="abc";事後指定進去陣列
+
+<?php foreach($other_article as $list):?>
+<?php endforeach;?>帶有FOR迴圈的感覺
+
+$length = strlen('asdasd');取的字元長度 
+
+中文字串佔3位元
+
+substr($str,0,3) = splice(0,3) 從0取三碼
+
+mb_substr($str,0,3)抓中文的
+
+str_replace("","",$str)置換內容(置換的內容,對象內容,對象)
+
+date("");日期方法
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
