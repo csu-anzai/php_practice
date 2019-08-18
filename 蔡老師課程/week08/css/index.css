@@ -1,0 +1,30 @@
+body {
+  background-image: url(../images/guardians_of_the_galaxy_groot_and_rocket_raccoon-wallpaper-1920x1080.jpg);
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+a{
+  text-decoration: none;
+}
+ul{
+  list-style: none;
+  width:300px;
+  margin:200px auto;
+  padding-left: 0;
+}
+ul li a{
+  width: 100%;
+  display: inline-block;
+  text-align : center;
+  padding:15px 60px;
+  color:#fff;
+  border: solid 1px #aaa;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 7px;
+}
+
+ul li a:hover{
+  background-color: rgba(0, 0, 0, 0.8);
+}

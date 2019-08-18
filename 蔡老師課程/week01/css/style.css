@@ -1,0 +1,53 @@
+/** clearfix **/
+.clearfix:after {
+    clear: both;
+	content: ".";
+	display: block;
+	font-size: 0;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+}
+/* Hides from IE-mac \*/
+* html .clearfix {height: 1%;}
+.clearfix {display: block;zoom: 1;}
+/* End hide from IE-mac */
+
+
+.left{
+	float:left;
+}
+.right{
+	float:right;
+}
+
+body {
+	font: 10pt Verdana,"微軟正黑體","Microsoft JhengHei", sans-serif;
+	
+}
+div.main{
+	margin:10px auto;
+	width:900px;
+}
+ul{
+	list-style: none;
+}
+div.user,div.computer,div.result{
+	text-align:center;
+}
+div.user,div.computer,div.myChoice{
+	border:#aaa solid 1px;
+}
+div.myChoice{
+  margin-left:10px;
+  text-align:center;
+  width:202px;
+  height:161px;
+}
+
+ul{
+	padding-left:0;
+}
+.text-center{
+  text-align: center;
+}

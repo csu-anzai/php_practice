@@ -1,0 +1,85 @@
+body {
+	font: 10pt "微軟正黑體", "Microsoft JhengHei", 'Lucida Grande', 'Lucida Sans Unicode', Helvetica, Arial, sans-serif;
+	background:#333 url(../images/bg.jpg) no-repeat;
+	background-position: center top;
+	background-attachment:fixed;
+	color:#fff;
+}
+a {
+	color:#fff;
+	text-decoration: none;
+}
+a:hover {
+	color:#f9ffc1;
+}
+div.menu{
+	margin-top:60px;
+	background-color:rgba(0,0,0,0.6);
+}
+div.menu nav{
+	width:1024px;
+	margin: 0 auto;
+}
+div.menu nav ul{
+	padding-left:0;
+}
+div.menu nav ul li{
+	display:inline-block;
+}
+div.menu nav ul li a{
+	display:block;
+	padding:10px 20px;
+	font-size:16pt;
+}
+
+div.main{
+	width:984px;
+	margin: 0 auto;
+	margin-top:30px;
+	background-color:rgba(0,0,0,0.6);
+	min-height:300px;
+	padding:20px;
+}
+div.main h1.welcome{
+	font-size:36pt;
+	text-align:center;
+}
+div.main div.intro{
+	text-align:center;
+}
+div.main div.intro p{
+	font-size:16pt;
+}
+div.main div.game_video{
+	text-align:center;
+	margin-bottom:20px;
+}
+
+label{
+  display:inline-block;
+  vertical-align:top;
+}
+input, textarea{
+	width:80%;
+	color:#333;
+}
+textarea{
+	height:300px;
+}
+
+form p{
+	text-align:center;
+}
+button{
+	border:#ffe800 solid 1px;
+	background-color:#000;
+	color:#fff;
+	padding:5px 30px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+button:active{
+	background-color:#333;
+	border:#fff8c3 solid 1px;
+}
