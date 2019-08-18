@@ -30,13 +30,13 @@
         function checkForm() {
             let a = parseInt(document.form1.a.value);
             let b = parseInt(document.form1.b.value);
-            
             let fd = new FormData(document.form1)
             fetch(`0814post.php`, {
                 method: 'POST',
                 body: fd
             })
                 .then(response => {
+                    console.log(response)
                     return response.text();
                 })
                 .then(result => {
