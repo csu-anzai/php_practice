@@ -106,15 +106,54 @@ join("想加入的東西",陣列變數);陣列輸出成字串並且中間加上�
 
 date("");日期方法
 
-POST:資料不會顯示在網址列,常用在帳號密碼ㄔㄛ
+
+
+0819
+
+POST:資料不會顯示在網址列,常用在帳號密碼
 
 GET:資料會顯示在網紙業,常用在查詢和不需要保密的情況,
 
+$p = 'index';
+if (isset($_GET['p'])) {
+	$p = $_GET['p'];
+}
+print_r($_GET);
+//假如已經有這個變數安裝一這個變數當索引值,再把變數的值設定給索引值 
+
+switch ($p) {
+	case 'index';
+		$title = 'index';
+		break;
+	default:
+	$title = '404';
+		break;
+}
+//變數等同於CASE的時候是TRUE起動內容再跳掉
+
+require 簡單來說開頭放變數方法陣列之類的基本上兩個是一樣的
+
+include 印出內容用基本上兩個是一樣的
+
+header('Location:網址') php轉址方法
+
+placeholder="";預設會消失的字
+
+cookie存在使用者瀏覽器
+setcookie("變數名稱","值",time()+時間秒為單位);設定會有時間差要第二次才生效所以可以用在會員帳密
+setcookie("變數名稱","空白",time());一種清除方式
+setcookie("變數名稱",time());當下就清除
+$_COOKIE['變數'];//這樣可以印出值
+
+session紀錄在私服器上面不同頁面可以使用
+session_start();
+$_SESSION['myName']='值';
+session_destroy();清除檔案下次就不見直接看調
+session_unset();馬上清除陣列內容但是還會在
 
 
 
-
-
+PHPINFO()//看設定值
 
 
 
