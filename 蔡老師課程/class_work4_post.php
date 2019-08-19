@@ -10,7 +10,7 @@
 
 <body>
     <h1>聯絡我們</h1>
-    <form action="">
+    <form action="showPost.php" method="post">
         <div>狀況:
             <select name="status" id="">
                 <option value="速件">速件</option>
@@ -24,20 +24,20 @@
         </div>
         <div>
             <label>信箱:
-                <input type=" email" name=" email">
+                <input type="email" name=" email">
             </label>
         </div>
         <div>
             <label>暱稱:
-                <input type=" email" name=" name">
+                <input type="text" name=" name">
             </label>
         </div>
         <div>性別:
             <label for="man">男
                 <input type="radio" name="gender" value="男" id="man">
             </label>
-            <label for="womem">女
-                <input type="radio" name="gender" value="女" id="womem">
+            <label for="women">女
+                <input type="radio" name="gender" value="女" id="women">
             </label>
         </div>
         <div>
