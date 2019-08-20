@@ -1,14 +1,11 @@
     <?php include __DIR__ . '/__0819header.php'; ?>
     <?php include __DIR__ . '/__0819nav.php'; ?>
     <div class="container">
-    <?php
-    require __DIR__ . '/content.php';
 
-    $stmt = $pdo->query("SELECT * FROM `address_book`");
-
-    while ($A = $stmt->fetch()) {
-        echo "{$A['name']}{$A['email']} <br>";
-    } ?>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        </ul>
+    </nav>
     <?php include __DIR__ . '/__0819footer.php'; ?>
-
