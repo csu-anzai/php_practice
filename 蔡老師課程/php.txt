@@ -151,11 +151,23 @@ $_SESSION['myName']='值';
 session_destroy();清除檔案下次就不見直接看調
 session_unset();馬上清除陣列內容但是還會在
 
-
-
 PHPINFO()//看設定值
 
-
+0820//
+form
+input raido要同一個NAME check的NAME要加[]把所有的直放到陣列
+input file <form action="reviewData.php" method="post" enctype="multipart/form-data">要有ENC才能送
+textarea
+label
+fieldset
+legend
+select
+optgroup
+option
+button
+<button type="button" onclick="alert('我只是一般按鈕');">一般按鈕</button>
+<button type="reset">清除</button>
+<button type="submit">送出</button>
 
 
 

@@ -74,7 +74,7 @@
       <hr>
 
       <h4>input 檔案 file</h4>
-      <input type="file" name="myfile">
+      <input type="file" name="myfile" accept="image/*">
 
       <hr>
 

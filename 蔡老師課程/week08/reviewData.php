@@ -3,7 +3,7 @@
 $photo = '';
 if(isset($_FILES['photo']))
 {
-  //print_r($_FILES);
+  print_r($_FILES);
   /**
    * //檔案的陣列有以下索引值
    * $_FILES['設定的name鍵值']['name'] 原本的檔名
@@ -45,7 +45,8 @@ if(isset($_FILES['photo']))
     密碼： <?php echo $_POST['password'];?>
 
     <p>個人資訊</p>
-    姓名：<?php echo $_POST['name'];?><br>
+    姓名：<?php echo $_POST['name'];
+    ?><br>
     性別：<?php echo $_POST['gender'];?><br>
     電話：<?php echo $_POST['phone'];?><br>
     住址：<?php echo $_POST['address'];?><br>
