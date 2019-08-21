@@ -17,3 +17,4 @@ if (isset($_SESSION['link'])) {
 } else {
     echo '無法連線'.mysqli_connect_error();
 }
+?>
