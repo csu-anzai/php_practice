@@ -1,4 +1,5 @@
 <?php
+$page_title = '項目清單';
 require __DIR__ . '/__contect.php';
 
 $page_name = 'data_list';
@@ -60,11 +61,13 @@ if ($page > $total) {
             <?php
             $p_start = $page - 5;
             $p_end = $page + 5;
-            
             for ($i = $p_start; $i < $p_end; $i++) {
                 if ($i < 1 or $i > $total) {
                     continue;
-                }};
+                    if ($i > 20) { 
+                        
+                    }
+                }
                 ?>
             <li class="page-item <?= $i == $page ? 'active'  : '' ?> "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
             <?php } ?>

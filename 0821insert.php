@@ -2,7 +2,7 @@
 session_start();
 require __DIR__ . '/__contect.php';
 $page_name = 'data_insert';
-$page_title = '新資料夾';
+$page_title = '新增料夾';
 $_SESSION['myName'] = 'Hey!!!!'
 ?>
 <?php include __DIR__ . '/__0819header.php'; ?>

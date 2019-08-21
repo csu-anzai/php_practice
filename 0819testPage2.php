@@ -1,4 +1,5 @@
 <?php
+$page_title = '第二頁';
 $page_name = 'PAGE2';
 ?>
 

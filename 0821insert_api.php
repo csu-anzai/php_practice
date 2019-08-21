@@ -1,4 +1,5 @@
 <?php
+$page_title = '新增料夾';
 session_start();
 require __DIR__ . '/__contect.php';
 if (empty($_POST['name'])) {
