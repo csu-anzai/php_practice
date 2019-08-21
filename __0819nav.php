@@ -15,6 +15,9 @@
                 <li class="nav-item <?= $page_name=='data_list' ? 'active' : '' ?>">
                     <a class="nav-link" href="0820data_list.php">清單列表</a>
                 </li>
+                <li class="nav-item <?= $page_name=='data_insert' ? 'active' : '' ?>">
+                    <a class="nav-link" href="0821insert.php">新增資料</a>
+                </li>                                                  
                 <li class="nav-item <?= $page_name=='PAGE2' ? 'active' : '' ?>">
                     <a class="nav-link" href="0819testPage2.php">PAGE2</a>
                 </li>                                                  

@@ -1,16 +1,18 @@
-<style>
-
-
-</style>
-
 <?php
 require __DIR__ . '/__contect.php';
 
 $page_name = 'data_list';
 
-$per_page = 10;
+$per_page = 5;
 
 $page =  isset($_GET['page']) ? intval($_GET['page']) : 1;
+
+
+if ($page < 1) {
+    header('Location:0820data_list.php');
+    exit;
+}
+
 
 $_sql = sprintf(
     "SELECT * FROM `address_book` ORDER BY `sid` DESC LIMIT %s, %s",
@@ -28,7 +30,6 @@ $rows = $stmt->fetch(); //取得TABLE的一個陣列
 
 //var_dump($rows);
 
-
 // echo $per_page;
 
 $t_sql = " SELECT COUNT(1) FROM `address_book` WHERE 1";
@@ -38,8 +39,10 @@ $stmt3 =  $pdo->query($t_sql);
 $totalRows =  $stmt3->fetch(PDO::FETCH_NUM)[0];
 
 $total = ceil($totalRows / $per_page);
-
-
+if ($page > $total) {
+    header('Location:0820data_list.php?page=' . $total);
+    exit;
+}
 // echo $totalRows;
 
 // echo $total;
@@ -50,6 +53,26 @@ $total = ceil($totalRows / $per_page);
 
 <?php include __DIR__ . '/__0819header.php'; ?>
 <?php include __DIR__ . '/__0819nav.php'; ?>
+<div class="container m-5">
+    <nav aria-label="Page navigation example ">
+        <ul class="pagination  justify-content-center">
+            <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>"><i class="fas fa-arrow-left"></i></a></li>
+            <?php
+            $p_start = $page - 5;
+            $p_end = $page + 5;
+            
+            for ($i = $p_start; $i < $p_end; $i++) {
+                if ($i < 1 or $i > $total) {
+                    continue;
+                }};
+                ?>
+            <li class="page-item <?= $i == $page ? 'active'  : '' ?> "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
+            <?php } ?>
+            <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>"><i class="fas fa-arrow-right"></i></a></li>
+
+        </ul>
+    </nav>
+</div>
 <div class="container">
     <table class="table">
         <thead>
@@ -89,13 +112,5 @@ $total = ceil($totalRows / $per_page);
         </tbody>
     </table>
 </div>
-<div class="container ">
-    <nav aria-label="Page navigation example ">
-        <ul class="pagination  justify-content-center">
-            <?php for ($i = 1; $i < $total + 1; $i++) { ?>
-            <li class="page-item "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
-            <?php } ?>
-        </ul>
-    </nav>
-</div>
+
 <?php include __DIR__ . '/__0819footer.php'; ?>
