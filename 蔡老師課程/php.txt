@@ -53,9 +53,9 @@ switch(值){
 
 while(判別式){}
 
-foreach(陣列變數 as $key索引值的意思 => value值){}抓出陣列每個東西 
+foreach(陣列變數 as $key索引值的意思 => value值){} 抓出陣列每個東西 
 
-foreach(陣列變數 as $value值)這樣寫也可以$value['屬性']
+foreach(陣列變數 as $value值)這樣寫也可以$value這個陣列的['屬性']
 
 foreach(陣列變數 as $key索引值)不能這樣寫會和上面拿到的是值不會拿到索引
 
@@ -170,17 +170,89 @@ button
 <button type="submit">送出</button>
 
 
+0821//
 
 
+mysqli_connet("主機","帳號","密碼","資料庫名稱");
+
+mysqli_close();關閉資料庫
+
+mysqli_query($link, "SET NAMES utf8");執行(連線的資料庫,設定);
+
+mysqli_connect_error();錯誤
+
+SELECT * FROM `user`;
+
+//載入 db.php 檔案，讓我們可以透過它連接資料庫
+
+require_once 'db.php';
 
 
+//定義一個 $datas 陣列變數，準備要放查詢的資料
+
+$datas = array();
+
+//將查詢語法當成字串，記錄在$sql變數中
+
+$sql = "SELECT * FROM `user`;";
+
+//用 mysqli_query 方法取執行請求（也就是sql語法），請求後的結果存在 $query 變數中
+
+$result = mysqli_query($link, $sql);
+
+//如果請求成功
+
+if ($result)
+{
+  //使用 mysqli_num_rows 方法，判別執行的語法，其取得的資料量，是否大於0
+  if (mysqli_num_rows($result) > 0)
+  {
+    //取得的量大於0代表有資料
+    //while迴圈會根據查詢筆數，決定跑的次數
+    //mysqli_fetch_assoc 方法取得 一筆值
+    while ($row = mysqli_fetch_assoc($result))
+    {
+      $datas[] = $row;
+    }
+  }
+
+  //釋放資料庫查詢到的記憶體
+  mysqli_free_result($result);
+}
+else
+{
+  echo "{$sql} 語法執行失敗，錯誤訊息：" . mysqli_error($link);
+}
+
+if (!empty($datas))
+{
+  //如果 $datas 不是空的，就用print_r印出 $datas
+  print_r($datas);
+}
+else
+{
+  //為空的，代表沒資料
+  echo "查無資料";
+}
+
+Array ( [0] => Array ( [id] => 1 [username] => mktsai [password] => asdkljfioej [name] => 阿洋 ) [1] => Array ( [id] => 2 [username] => albee [password] => ajsdfijlk [name] => 阿喵 ) )
+
+$sql = "INSERT INTO `address_book`( `name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
+VALUES ( ?,? ,?,?,?,now())";新增語法
+
+mysqli_affected_rows($link) > 0 是否有新增刪除修改
+
+$new_id = mysqli_insert_id($link);抓ID
+echo "執行成功，新增後的 id 為 {$new_id}";
+
+$sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' WHERE `id` = 1;";修改語法
+
+$sql = "DELETE FROM `user` WHERE `id` = 1;";刪除語法
+
+$result = mysqli_query($link,$sql);不管是哪個都要有這個啟動語法
+
+$sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' LIKE 	'XXX%' ";刪除前面是xxx後面不管
+
+ ///
 
 
-
-
-
-
-
-
-
- 

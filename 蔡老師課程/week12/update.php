@@ -55,9 +55,10 @@ else
 						<?php
 						//將查詢語法當成字串，記錄在$sql變數中
 						$sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' WHERE `id` = 1;";
+						//$sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' LIKE 	'XXX%' ";刪除前面是xxx後面不管
 						
 						 //用 mysqli_query 方法取執行請求（也就是sql語法），請求後的結果存在 $query 變數中						$result = mysqli_query($link, $sql);
-						
+						$result = mysqli_query($link,$sql);
 						//如果有異動到數量，代表有跟新資料;
 						if(mysqli_affected_rows($link) > 0)
 						{

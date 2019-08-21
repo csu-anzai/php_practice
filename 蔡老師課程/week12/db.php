@@ -4,7 +4,7 @@ $host = 'localhost';
 //以root管理者帳號進入資料庫
 $dbuser = 'root';
 //root的資料庫密碼
-$dbpw = 'stust';
+$dbpw = 'newpassword';
 //登入後要使用的資料庫
 $dbname = 'my_db';
 
