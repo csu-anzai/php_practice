@@ -253,6 +253,6 @@ $result = mysqli_query($link,$sql);不管是哪個都要有這個啟動語法
 
 $sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' LIKE 	'XXX%' ";刪除前面是xxx後面不管
 
- ///
-
+0822///
+<?php include_once 'menu.php'; ?>
 
