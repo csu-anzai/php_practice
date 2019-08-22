@@ -1,9 +1,24 @@
 <?php
 session_start();
+
 require __DIR__ . '/__contect.php';
-$page_name = 'data_insert';
-$page_title = '新增料夾';
-$_SESSION['myName'] = 'Hey!!!!'
+
+$page_name = 'data_edit';
+
+$page_title = '編輯資料';
+
+$_SESSION['myName'] = 'Hey!!!!';
+
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0 ;
+
+$sql = " SELECT * FROM `address_book` WHERE `sid`=$sid ";
+
+$row = $pdo->query($sql)->fetch();
+
+if(empty($sid)){
+    header('Location:0820data_list.php');
+    exit;
+}
 ?>
 <?php include __DIR__ . '/__0819header.php'; ?>
 <?php include __DIR__ . '/__0819nav.php'; ?>
@@ -23,11 +38,11 @@ $_SESSION['myName'] = 'Hey!!!!'
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
+                    <h5 class="card-title">編輯資料</h5>
                     <form class="needs-invalied" name="form1" onsubmit="return checkForm()">
                         <div class="form-group">
                             <label for="name">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" value="<?= $row['name'] ?>" >
                             <small id="nameHelp" class="form-text text-muted red"></small>
                         </div>
                         <div class="form-group">

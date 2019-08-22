@@ -3,9 +3,9 @@
 
 $host =  'localhost';
 
-$dbuser = 'root';
+$dbuser = 'jason';
 
-$dbpw = 'newpassword';
+$dbpw = 'z27089433';
 
 $dbname = 'my_db';
 

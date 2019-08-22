@@ -64,9 +64,7 @@ if ($page > $total) {
             for ($i = $p_start; $i < $p_end; $i++) {
                 if ($i < 1 or $i > $total) {
                     continue;
-                    if ($i > 20) { 
-                        
-                    }
+                    if ($i > 20) { }
                 }
                 ?>
             <li class="page-item <?= $i == $page ? 'active'  : '' ?> "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
@@ -80,23 +78,35 @@ if ($page > $total) {
     <table class="table">
         <thead>
             <tr>
+                <th scope="col"><i class="fas fa-trash-alt"></i></th>
                 <th scope="col">#</th>
                 <th scope="col">姓名</th>
                 <th scope="col">電子郵箱</th>
                 <th scope="col">手機</th>
                 <th scope="col">生日</th>
                 <th scope="col">地址</th>
+                <th scope="col"><i class="fas fa-edit"></i></th>
             </tr>
         </thead>
         <tbody>
             <?php while ($rows = $stmt->fetch()) { ?>
             <tr>
+                <td>
+                    <a href="javascript:delete_one(<?= $rows['sid'] ?>)">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                </td>
                 <td><?= $rows['sid'] ?></td>
                 <td><?= $rows['name'] ?></td>
                 <td><?= $rows['email'] ?></td>
                 <td><?= $rows['mobile'] ?></td>
                 <td><?= $rows['birthday'] ?></td>
                 <td><?= $rows['address'] ?></td>
+                <td>
+                    <a href="edit.php?sid=<?= $rows['sid'] ?>">
+                        <i class="fas fa-edit"></i>
+                    </a>
+                </td>
             </tr>
             <?php } ?>
 
@@ -114,6 +124,26 @@ if ($page > $total) {
                 */ ?>
         </tbody>
     </table>
+
+
+
+
+
+    <!-- <script>
+        function delete_one(sid) {
+            if(confirm(`確定要刪除編號為 ${sid} 的資料嗎?`)){
+                location.href = 'delete.php?sid=' + sid;
+            }
+        }
+    </script> -->
+
+    <script>
+        function delete_one(sid) {
+            if (confirm(`要刪除第${sid}筆資料嗎？`)) {
+                location.href = 'delete.php?sid=' + sid;
+            }
+        }
+    </script>
 </div>
 
 <?php include __DIR__ . '/__0819footer.php'; ?>
