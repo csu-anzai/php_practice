@@ -27,15 +27,17 @@ $workData = get_publish_work();
         <div class="container">
             <div class="row ">
                 <?php if (!empty($workData)) : ?>
-                <?php foreach ($workData  as  $v): ?>
-                <div class="col-sm-4  justify-content-center ">
+                <?php foreach ($workData  as  $v) : ?>
+                <div class="col-sm-12 justify-content-center ">
                     <div class="card" style="width: 18rem;">
-                        <video src="<?= $v['video_path']; ?>" class="card-img-top" alt="...">
+                        <video src="<?= $v['video_path']; ?>" class="card-img-top" alt="..." controls></video>
                         <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
+                            <h5 class="card-title"><?= $v['intro']; ?>123</h5>
                             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                             <a href="#" class="btn btn-primary">Go somewhere</a>
                         </div>
+
+
                     </div>
                 </div>
                 <?php endforeach; ?>
