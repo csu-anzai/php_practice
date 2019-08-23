@@ -255,4 +255,6 @@ $sql = "UPDATE `user` SET `password` = 'newpw123456', `name` = '菜頭' LIKE 	'X
 
 0822///
 <?php include_once 'menu.php'; ?>
-
+$變數['字串'] 這是物件
+$變數[數字] 這是陣列
+$變數[變數] 不知道

@@ -35,3 +35,22 @@ function get_article($id)
     }
     return  $result;
 }
+function get_publish_work()
+{
+    $data = array();
+
+    $sql = "SELECT * FROM `works` WHERE `publish` = 1";
+
+    $query = mysqli_query($_SESSION['link'], $sql);
+
+    if ($query) {
+        if (mysqli_num_rows($query) > 0) {
+            while ($row = mysqli_fetch_assoc($query)) {
+                $data[] = $row;
+            }
+        } else {
+            echo "wrong" . mysqli_error($_SESSION['link']);
+        }
+    }
+    return $data;
+}
