@@ -18,3 +18,7 @@ try {
 } catch (PDOException $ex) {
     echo 'Connection failed:' . $ex->getMessage();
 }
+
+if (!isset($_SESSION)) {
+    session_start();
+}

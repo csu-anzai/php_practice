@@ -1,25 +1,9 @@
 <?php
 require_once 'php/db.php';
 require_once 'php/functions.php';
-
 $workData = get_publish_work();
 ?>
-<!DOCTYPE html>
-<html lang="zh-TW">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge,chrome=1">
-    <meta name="description" content="瀚文的部落格">
-    <meta name="author" content="劉瀚文">
-    <title><?php echo $article['title']; ?></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<style>
-</style>
+<?php include_once 'head.php'; ?>
 
 <body>
     <?php include_once 'menu.php'; ?>
@@ -28,16 +12,18 @@ $workData = get_publish_work();
             <div class="row ">
                 <?php if (!empty($workData)) : ?>
                 <?php foreach ($workData  as  $v) : ?>
-                <div class="col-sm-12 justify-content-center ">
+                <div class="col-md-4  col-sm-12 d-flex justify-content-center">
                     <div class="card" style="width: 18rem;">
+                        <?php if ($v['image_path']) : ?>
+                        <img src="<?= $v['image_path']; ?>" width="100%" alt="">
+                        <?php else : ?>
                         <video src="<?= $v['video_path']; ?>" class="card-img-top" alt="..." controls></video>
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $v['intro']; ?>123</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <?php endif; ?>
+                        <div class="card-body d-flex  justify-content-between" style="flex-direction: column;">
+                            <h5 class="card-title"><?= $v['intro']; ?></h5>
+                            <p class="card-text"></p>
+                            <a href="workContent.php?i=<?php echo $v['id']; ?>" class="btn btn-primary">看更多</a>
                         </div>
-
-
                     </div>
                 </div>
                 <?php endforeach; ?>

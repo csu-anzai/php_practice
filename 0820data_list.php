@@ -1,5 +1,7 @@
 <?php
 $page_title = '項目清單';
+
+
 require __DIR__ . '/__contect.php';
 
 $page_name = 'data_list';
@@ -54,25 +56,25 @@ if ($page > $total) {
 
 <?php include __DIR__ . '/__0819header.php'; ?>
 <?php include __DIR__ . '/__0819nav.php'; ?>
-<div class="container m-5">
-    <nav aria-label="Page navigation example ">
-        <ul class="pagination  justify-content-center">
-            <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>"><i class="fas fa-arrow-left"></i></a></li>
-            <?php
-            $p_start = $page - 5;
-            $p_end = $page + 5;
-            for ($i = $p_start; $i < $p_end; $i++) {
-                if ($i < 1 or $i > $total) {
-                    continue;
-                    if ($i > 20) { }
-                }
-                ?>
-            <li class="page-item <?= $i == $page ? 'active'  : '' ?> "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
-            <?php } ?>
-            <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>"><i class="fas fa-arrow-right"></i></a></li>
+<nav aria-label="Page navigation example">
+    <ul class="pagination  justify-content-center  m-3">
+        <li class="page-item"><a class="page-link" href="?page=<?= $page - 1 ?>"><i class="fas fa-arrow-left"></i></a></li>
+        <?php
+        $p_start = $page - 5;
+        $p_end = $page + 5;
+        for ($i = $p_start; $i < $p_end; $i++) {
+            if ($i < 1 or $i > $total) {
+                continue;
+                if ($i > 20) { }
+            }
+            ?>
+        <li class="page-item <?= $i == $page ? 'active'  : '' ?> "><a class="page-link" href="0820data_list.php?page=<?php echo $i ?>"><?= $i ?></a></li>
+        <?php } ?>
+        <li class="page-item"><a class="page-link" href="?page=<?= $page + 1 ?>"><i class="fas fa-arrow-right"></i></a></li>
+    </ul>
+</nav>
+<div class="container ">
 
-        </ul>
-    </nav>
 </div>
 <div class="container">
     <table class="table">

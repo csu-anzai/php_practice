@@ -40,19 +40,19 @@ switch (basename($_SERVER['PHP_SELF'], ".php")) {
                         </button>
                         <div class="collapse navbar-collapse " id="navbarNav">
                             <ul class="navbar-nav w-100 justify-content-between">
-                                <li class="nav-item <?php echo ($index == 0)?'active':'';?>">
+                                <li class="nav-item <?php echo ($index == 0) ? 'active' : ''; ?>">
                                     <a class="nav-link" href="./">Home <span class="sr-only">(current)</span></a>
                                 </li>
-                                <li class="nav-item <?php echo ($index == 1)?'active':'';?>">
+                                <li class="nav-item <?php echo ($index == 1) ? 'active' : ''; ?>">
                                     <a class="nav-link" href="article.php">ARTICLE</a>
                                 </li>
-                                <li class="nav-item <?php echo ($index == 2)?'active':'';?>">
+                                <li class="nav-item <?php echo ($index == 2) ? 'active' : ''; ?>">
                                     <a class="nav-link" href="work.php">WORK</a>
                                 </li>
-                                <li class="nav-item <?php echo ($index == 3)?'active':'';?>">
+                                <li class="nav-item <?php echo ($index == 3) ? 'active' : ''; ?>">
                                     <a class="nav-link" href="about.php">ABOUT ME</a>
                                 </li>
-                                <li class="nav-item <?php echo ($index == 4)?'active':'';?>">
+                                <li class="nav-item <?php echo ($index == 4) ? 'active' : ''; ?>">
                                     <a class="nav-link" href="register.php">REGISTER</a>
                                 </li>
                             </ul>

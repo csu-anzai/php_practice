@@ -1,5 +1,6 @@
 <?php
 session_start();
+require __DIR__ .'/_admin_required.php';
 require __DIR__ . '/__contect.php';
 $page_name = 'data_insert';
 $page_title = '新增料夾';
@@ -47,7 +48,7 @@ $_SESSION['myName'] = 'Hey!!!!'
                         </div>
                         <div class="form-group">
                             <label for="address">地址</label>
-                            <input type="text" class="form-control" id="address" name="address" placeholder="Enter address">
+                            <textarea class="form-control" id="address" + name="address" cols="30" rows="10"></textarea>
                             <small id="addressHelp" class="form-text text-muted "></small>
                         </div>
                         <button type="submit" class="btn btn-primary" id="submit_btn">新增</button>
