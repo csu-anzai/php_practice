@@ -408,7 +408,7 @@ function update_article($id, $title, $category, $content, $publish)
 	$content = htmlspecialchars($content);
 	//更新語法
   $sql = "UPDATE `article` SET `title` = '{$title}', `category` = '{$category}', `content` = '{$content}', `publish` = {$publish}, `modify_date` = '{$modify_date}'
-  				WHERE `id` = {$id};";
+  				WHERE `id` = {$id};";`
 
   //用 mysqli_query 方法取執行請求（也就是sql語法），請求後的結果存在 $query 變數中
   $query = mysqli_query($_SESSION['link'], $sql);

@@ -86,7 +86,7 @@
 			        	$("form.register button[type='submit']").removeClass('disabled');
 			        }
 			        else
-			        {
+			        { 
 			        	alert("帳號有重複，不可以註冊");
 			        	$("#username").parent().removeClass("has-success").addClass("has-error");
 			        	//把註冊按鈕加上 disabled 不能按，在bootstrap裡 disabled 類別可以讓該元素無法操作

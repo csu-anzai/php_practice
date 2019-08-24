@@ -1,14 +1,14 @@
 <?php
-@session_start();
+session_start();
 
 $host =  'localhost';
 
-$dbuser = 'jason';
+$dbuser = 'root';
 
-$dbpw = 'z27089433';
+$dbpw = 'newpassword';
 
 $dbname = 'my_db';
-
+//宣告一個 link 變數，並執行連結資料庫函式 mysqli_connect()，連結結果會帶入 link 當中
 $_SESSION['link'] = mysqli_connect($host, $dbuser, $dbpw, $dbname);
 
 if (isset($_SESSION['link'])) {
