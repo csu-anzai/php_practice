@@ -3,9 +3,9 @@ session_start();
 
 $host =  'localhost';
 
-$dbuser = 'root';
+$dbuser = 'jason';
 
-$dbpw = 'newpassword';
+$dbpw = 'z27089433';
 
 $dbname = 'my_db';
 //宣告一個 link 變數，並執行連結資料庫函式 mysqli_connect()，連結結果會帶入 link 當中
