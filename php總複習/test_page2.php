@@ -6,7 +6,7 @@
 
     require_once __DIR__ . '/php/__connect_db.php';
 
-    $stmt = $pdo->query("SELECT*FROM `address_book`");
+    $stmt = $pdo->query("SELECT*FROM `space_list`");
 
     // while (
     //     $row = $stmt->fetch()

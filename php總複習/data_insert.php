@@ -6,31 +6,66 @@ $page_title = '新增資料'
 ?>
 <?php include_once __DIR__ . '/__html_head.php' ?>
 <?php include_once __DIR__ . '/__navbar.php' ?>
+<style>
+    small.red {
+        color: red !important;
+    }
+</style>
 <div class="container   mt-3">
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-primary" role="alert" id="info-bar" style="display: none"></div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-6">
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">新增資料</h5>
-                    <form method="post" action="php/data_insert_api.php">
+                    <form onsubmit="return checkForm()" name="form1">
                         <div class="form-group">
-                            <label for="name">姓名</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Password">
+                            <label for="space_name">空間名稱</label>
+                            <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group">
-                            <label for="email">電子郵件</label>
-                            <input type="text" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="logo_path">LOGO上傳</label>
+                            <input type="text" class="form-control" id="logo_path" name="logo_path" aria-describedby="emailHelp" placeholder="Enter email">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group">
-                            <label for="mobile">手機</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" aria-describedby="emailHelp" placeholder="Enter mobile">
+                            <label for="space_description">環境介紹</label>
+                            <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group">
-                            <label for="birthday">生日</label>
-                            <input type="text" class="form-control" id="birthday" name="birthday" aria-describedby="emailHelp" placeholder="Enter birthday">
+                            <label for="image_path">圖片上傳</label>
+                            <input type="text" class="form-control" id="image_path" name="image_path" aria-describedby="emailHelp" placeholder="Enter birthday">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="space_time">提供時間</label>
+                            <input type="text" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="max_people">人數</label>
+                            <input type="number" class="form-control" id="max_people" name="max_people" aria-describedby="emailHelp" placeholder="Enter address">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="tel">電話</label>
+                            <input type="tel" class="form-control" id="tel" name="tel" aria-describedby="emailHelp" placeholder="Enter address">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="service">提供設備</label>
+                            <input type="text" class="form-control" id="service" name="service" aria-describedby="emailHelp" placeholder="Enter address">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">地區</label>
+                            <input type="text" class="form-control" id="area" name="area" aria-describedby="emailHelp" placeholder="Enter address">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group">
@@ -46,5 +81,44 @@ $page_title = '新增資料'
         </div>
     </div>
 
+
+
+    <script>
+        let info_bar = document.querySelector('#info-bar');
+        let space_name = document.querySelector('#space_name');
+        // let i, s, item;
+
+        function checkForm() {
+
+            if (space_name.value.length < 2) {
+                space_name.style.border = '1px solid red';
+                space_name.closest('.form-group').querySelector('small').innerText = '請填寫正確姓名';
+            
+            }
+
+
+            let fd = new FormData(document.form1); //要傳的資料
+
+            fetch('php/data_insert_api.php', {
+                    method: 'POST',
+                    body: fd, //要傳的資料
+                })
+                .then(response => {
+                    return response.json();
+                })
+                .then(json => {
+                    console.log(json);
+                    info_bar.style.display = 'block';
+                    info_bar.innerHTML = json.info;
+                    if (json.success) {
+                        info_bar.className = 'alert alert-success';
+                    } else {
+                        info_bar.className = 'alert alert-danger';
+                    }
+                });
+
+            return false;
+        }
+    </script>
 </div>
 </div> <?php include_once __DIR__ . '/__footer.php' ?>
