@@ -24,7 +24,7 @@ require_once __DIR__ . '/php/__connect_db.php';
                                     <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password">
                                     <small id="emailHelp" class="form-text"></small>
                                 </div>
-                                <!-- <div class="form-group">
+                                <div class="form-group">
                                     <label for="logo_path">LOGO上傳</label>
                                     <input type="text" class="form-control" id="logo_path" name="logo_path" aria-describedby="emailHelp" placeholder="Enter email">
                                     <small id="emailHelp" class="form-text"></small>
@@ -60,15 +60,15 @@ require_once __DIR__ . '/php/__connect_db.php';
                                     <small id="emailHelp" class="form-text"></small>
                                 </div>
                                 <div class="form-group">
+                                    <label for="service">service</label>
+                                    <input type="text" class="form-control" id="service" name="service" aria-describedby="emailHelp" placeholder="Enter address">
+                                    <small id="emailHelp" class="form-text"></small>
+                                </div>
+                                <div class="form-group">
                                     <label for="address">地址</label>
                                     <input type="text" class="form-control" id="address" name="address" aria-describedby="emailHelp" placeholder="Enter address">
                                     <small id="emailHelp" class="form-text"></small>
                                 </div>
-                                <div class="form-group">
-                                    <label for="status">狀態</label>
-                                    <input type="text" class="form-control" id="status" name="status" aria-describedby="emailHelp" placeholder="Enter address">
-                                    <small id="emailHelp" class="form-text"></small>
-                                </div> -->
 
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>

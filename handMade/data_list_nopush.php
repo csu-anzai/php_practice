@@ -94,9 +94,7 @@ $stmt = $pdo->query($sql);
                         <td><?= htmlentities($r['tel']) ?></td>
                         <td><?= htmlentities($r['area']) ?></td>
                         <td><?= htmlentities($r['address']) ?></td>
-                        <td><?php    $status = $r['status'];
-
-                                echo $status == 1 ? "上架中":"下架中";?></td>
+                        <td><?php $status = $r['status']; echo $status == 1 ? "上架中":"下架中";?></td>
                     </tr>
                     <?php endwhile; ?>
                 </tbody>

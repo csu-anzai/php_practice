@@ -1,4 +1,5 @@
 <?php
+
 require_once __DIR__ . '/php/__connect_db.php';
 $page_name = 'data_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -78,7 +79,7 @@ $stmt = $pdo->query($sql);
                         <th scope="col">電話</th>
                         <th scope="col">地區</th>
                         <th scope="col">地址</th>
-                        <th scope="col">上架狀態</th>
+                        <!-- <th scope="col">上架狀態</th> -->
                         <th scope="col"><i class="fas fa-edit"></i></th>
                     </tr>
                 </thead>
@@ -101,13 +102,7 @@ $stmt = $pdo->query($sql);
                         <td><?= htmlentities($r['tel']) ?></td>
                         <td><?= htmlentities($r['area']) ?></td>
                         <td><?= htmlentities($r['address']) ?></td>
-                        <td><?php
-                                $status = $r['status'];
-
-                                echo $status == 1 ? "上架中" : "下架中";
-
-
-                                ?></td>
+                        <!-- <td><?php $status = $r['status']; echo $status == 1 ? "上架中" : "下架中"; ?></td> -->
                         <td>
                             <a href="edit.php?sid=<?= $r['sid'] ?>">
                                 <i class="fas fa-edit"></i>

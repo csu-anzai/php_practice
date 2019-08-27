@@ -18,34 +18,41 @@ if(empty($_POST['space_name']) or empty($_POST['sid'])){
 }
 
 // TODO: 檢查必填欄位, 欄位值的格式
+// \[value\-\d\]
+//$sql = "INSERT INTO `space_list`(`sid`,`space_name`,`logo_path`,`space_description`,`image_path`,`space_time`,`max_people`,`tel`,`service`,`area`,`address`) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-# \[value\-\d\]
 
 $sql = "UPDATE `space_list` SET 
-            `space_name`=?,
-            `logo_path`=?,
-            `space_description`=?,
-            `image_path`=?,
-            `space_time`=?,
-            `max_people`=?,
-            `tel`=?,
-            `area`=?,
-            `address`=?,
-            WHERE `sid`=?";
+`space_name`=?,
+`logo_path`=?,
+`space_description`=?,
+`image_path`=?,
+`space_time`=?,
+`max_people`=?,
+`tel`=?,
+`service`=?,
+`area`=?,
+`address`=?,
+`user_id`=?
+WHERE `sid`=?";   
 
 $stmt = $pdo->prepare($sql);
 
 $stmt->execute([
-        $_POST['space_name'],
-        $_POST['logo_path'],
-        $_POST['space_description'],
-        $_POST['image_path'],
-        $_POST['space_time'],
-        $_POST['max_people'],
-        $_POST['tel'],
-        $_POST['area'],
-        $_POST['address'],
+    $_POST['space_name'],
+    $_POST['logo_path'],
+    $_POST['space_description'],
+    $_POST['image_path'],
+    $_POST['space_time'],
+    $_POST['max_people'],
+    $_POST['tel'],
+    $_POST['service'],
+    $_POST['area'],
+    $_POST['address'],
+    $_POST['user_id'],
+    $_POST['sid'],
 ]);
+// print_R($stmt);
 
 if($stmt->rowCount()==1){
     $result['success'] = true;
@@ -57,5 +64,3 @@ if($stmt->rowCount()==1){
 }
 
 echo json_encode($result, JSON_UNESCAPED_UNICODE);
-
-?>

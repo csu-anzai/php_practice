@@ -45,7 +45,7 @@
                             <a href="insert.php">上架</a>
                         </li>
                         <li>
-                            <a href="data_list_nopush.php">下架中</a>
+                            <a href="data_list_nopush.php">商品狀態</a>
                         </li>
                         <li>
                             <a href="data_list.php">編輯</a>
