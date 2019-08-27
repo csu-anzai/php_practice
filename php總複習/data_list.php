@@ -1,38 +1,24 @@
 <?php
 require_once __DIR__ . '/php/__connect_db.php';
-
 $page_name = 'data_list';
-
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-
 $t_sql = "SELECT COUNT(1) FROM `space_list`";
-
 $t_stmt = $pdo->query($t_sql);
-
 $totalRows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
-
 $per_page = 5;
-
 $totalPages = ceil($totalRows / $per_page);
-
 if ($page < 1) {
     header('Location:data_list.php');
     exit;
 }
-
 if ($page > $totalPages) {
     header('Location:data_list.php?page=' . $totalPages);
     exit;
 }
-
 // $sql = ""
 $sql  =  sprintf("SELECT*FROM`space_list` ORDER BY `sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
-
-
-
 // $rows = $stmt->fetch();
-
 // print_r($rows);
 ?>
 <?php include_once __DIR__ . '/__html_head.php' ?>

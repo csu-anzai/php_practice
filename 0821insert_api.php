@@ -18,7 +18,7 @@ if (empty($_POST['name'])) {
 $sql = "INSERT INTO `address_book`( `name`, `email`, `mobile`, `birthday`, `address`, `created_at`) 
 VALUES ( ?,? ,?,?,?,now())";
 
-$stmt = $pdo->prepare($sql);
+$stmt = $pdo->prepare($sql);    
 
 $stmt->execute([
     $_POST['name'],
