@@ -1,6 +1,6 @@
 <?php
 // $page_title = '新增料夾';
-// session_start();
+session_start();
 // require __DIR__ .'/_admin_required.php';
 // require __DIR__ . '/__contect.php';
 // $result = [
