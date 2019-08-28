@@ -12,13 +12,28 @@ $result = [
 
 
 # 如果沒有輸入必要欄位, 就離開
-if(empty($_POST['space_name'])){
+if (empty($_POST['space_name'])) {
     echo json_encode($result, JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 
-$sql = "INSERT INTO `space_list`(`space_name`,`logo_path`,`space_description`,`image_path`,`space_time`,`max_people`,`tel`,`service`,`area`,`address`) VALUES (?,?,?,?,?,?,?,?,?,?)";
+$sql = "INSERT INTO `space_list`(
+    `space_name`,
+    `logo_path`,
+    `space_description`,
+    `image_path`, 
+    `space_time`,
+    `max_people`,
+    `tel`,
+    `service`,
+    `area`,
+    `address`,
+    `status`,
+    `price`,
+    `title_description`,
+    `space_creat_time`)
+    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,NOW())";
 
 $stmt = $pdo->prepare($sql);
 
@@ -30,9 +45,12 @@ $stmt->execute([
     $_POST['space_time'],
     $_POST['max_people'],
     $_POST['tel'],
-    $_POST['area'],
     $_POST['service'],
+    $_POST['area'],
     $_POST['address'],
+    $_POST['status'],
+    $_POST['price'],
+    $_POST['title_description'],
 ]);
 
 if ($stmt->rowCount() == 1) {

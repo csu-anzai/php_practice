@@ -33,7 +33,11 @@ $sql = "UPDATE `space_list` SET
 `service`=?,
 `area`=?,
 `address`=?,
-`user_id`=?
+`status`=?,
+`price`=?,
+`title_description`=?,
+`space_creat_time`= NOW()
+-- `user_id`=?
 WHERE `sid`=?";   
 
 $stmt = $pdo->prepare($sql);
@@ -49,7 +53,10 @@ $stmt->execute([
     $_POST['service'],
     $_POST['area'],
     $_POST['address'],
-    $_POST['user_id'],
+    $_POST['status'],
+    $_POST['price'],
+    $_POST['title_description'],
+    // $_POST['user_id'],
     $_POST['sid'],
 ]);
 // print_R($stmt);

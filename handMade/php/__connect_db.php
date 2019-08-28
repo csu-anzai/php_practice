@@ -1,9 +1,9 @@
 <?php
 // session_start();
 $db_host = 'localhost';
-$db_name = 'project_hand';
+$db_name = 'my_db';
 $db_user = 'jason';
-$db_pass = '0000';
+$db_pass = 'z27089433';
 $db_charset = 'utf8';
 $db_collate = 'utf8_unicode_ci';
 
