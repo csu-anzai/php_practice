@@ -7,17 +7,18 @@ $t_sql = "SELECT COUNT(1) FROM `space_list`";
 $t_stmt = $pdo->query($t_sql);
 $totalRows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 $per_page = 5;
-$totalPages = ceil($totalRows / $per_page);
+$totalPages = ceil($totalRows / $per_page) ? ceil($totalRows / $per_page) : 1;
 if ($page < 1) {
     header('Location:data_list.php');
     exit;
-}
+} 
+
 if ($page > $totalPages) {
-    header('Location:data_list.php?page=' . $totalPages);
+    header('Location:data_list.php?page='.$totalPages);
     exit;
 }
 // $sql = ""
-$sql  =  sprintf("SELECT*FROM`space_list` ORDER BY `sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+$sql  =  sprintf("SELECT*FROM`space_list` ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
@@ -41,20 +42,19 @@ $stmt = $pdo->query($sql);
                 if ($totalPages < 5) {
                     $p_start = 1;
                     $p_end = $totalPages;
+                } else if ($page - 2 < 1) {
+                    $p_start = 1;
+                    $p_end = 5;
+                } else if ($page + 2 > $totalPages) {
+                    $p_start = $totalPages - 4;
+                    $p_end = $totalPages;
                 } else {
                     $p_start = $page - 2;
                     $p_end = $page + 2;
                 }
-                if ($page - 2 < 1) {
-                    $p_start = 1;
-                    $p_end = 5;
-                } elseif ($page + 2 > $totalPages) {
-                    $p_start = $totalPages - 3;
-                    $p_end = $totalPages;
-                }
                 for ($i = $p_start; $i <= $p_end; $i++) :
                     ?>
-                <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link " href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
+                    <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link " href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
                 <?php endfor; ?>
 
                 <li class="page-item">
@@ -86,29 +86,30 @@ $stmt = $pdo->query($sql);
                 <tbody>
 
                     <?php while ($r = $stmt->fetch()) : ?>
-                    <tr>
-                        <td>
-                            <a href="javascript:delete_one(<?= $r['sid'] ?>)">
-                                <i class="fas fa-trash-alt"></i>
-                            </a>
-                        </td>
-                        <td><?= htmlentities($r['sid']) ?></td>
-                        <td><?= htmlentities($r['space_name']) ?></td>
-                        <td><?= htmlentities($r['logo_path']) ?></td>
-                        <td><?= htmlentities($r['space_description']) ?></td>
-                        <td><?= htmlentities($r['image_path']) ?></td>
-                        <td><?= htmlentities($r['space_time']) ?></td>
-                        <td><?= htmlentities($r['max_people']) ?></td>
-                        <td><?= htmlentities($r['tel']) ?></td>
-                        <td><?= htmlentities($r['area']) ?></td>
-                        <td><?= htmlentities($r['address']) ?></td>
-                        <!-- <td><?php $status = $r['status']; echo $status == 1 ? "上架中" : "下架中"; ?></td> -->
-                        <td>
-                            <a href="edit.php?sid=<?= $r['sid'] ?>">
-                                <i class="fas fa-edit"></i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <a href="javascript:delete_one(<?= $r['space_sid'] ?>)">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                            <td><?= htmlentities($r['space_sid']) ?></td>
+                            <td><?= htmlentities($r['space_name']) ?></td>
+                            <td><?= htmlentities($r['space_logo_path']) ?></td>
+                            <td><?= htmlentities($r['space_description']) ?></td>
+                            <td><?= htmlentities($r['space_image_path']) ?></td>
+                            <td><?= htmlentities($r['space_time']) ?></td>
+                            <td><?= htmlentities($r['space_max_people']) ?></td>
+                            <td><?= htmlentities($r['space_tel']) ?></td>
+                            <td><?= htmlentities($r['space_area']) ?></td>
+                            <td><?= htmlentities($r['space_address']) ?></td>
+                            <!-- <td><?php $status = $r['space_status'];
+                                            echo $status == 1 ? "上架中" : "下架中"; ?></td> -->
+                            <td>
+                                <a href="edit.php?space_sid=<?= $r['space_sid'] ?>">
+                                    <i class="fas fa-edit"></i>
+                                </a>
+                            </td>
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>
@@ -120,7 +121,7 @@ $stmt = $pdo->query($sql);
 <script>
     function delete_one(sid) {
         if (confirm(`要刪除第${sid}筆資料嗎？`)) {
-            location.href = 'php/delete.php?sid=' + sid;
+            location.href = 'php/delete.php?space_sid=' + sid;
         }
     }
 </script>

@@ -1,4 +1,4 @@
-<footer class="footer">
+        <footer class="footer">
             <div class="row">
                 <div class="col-sm-6 text-center text-sm-right order-sm-1">
                     <ul class="text-gray">

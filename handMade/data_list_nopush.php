@@ -16,8 +16,8 @@ if ($page > $totalPages) {
     exit;
 }
 // $sql = ""
-$sql  =  sprintf("SELECT*FROM`space_list` WHERE `status`=0  ORDER BY `sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
-$stmt = $pdo->query($sql);
+    $sql  =  sprintf("SELECT*FROM`space_list` WHERE `status`=0  ORDER BY `sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+    $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
 ?>
@@ -53,7 +53,7 @@ $stmt = $pdo->query($sql);
                 }
                 for ($i = $p_start; $i <= $p_end; $i++) :
                     ?>
-                <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link " href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
+                    <li class="page-item <?= $i == $page ? 'active' : '' ?>"><a class="page-link " href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
                 <?php endfor; ?>
 
                 <li class="page-item">
@@ -83,19 +83,9 @@ $stmt = $pdo->query($sql);
                 <tbody>
 
                     <?php while ($r = $stmt->fetch()) : ?>
-                    <tr>
-                        <td><?= htmlentities($r['sid']) ?></td>
-                        <td><?= htmlentities($r['space_name']) ?></td>
-                        <td><?= htmlentities($r['logo_path']) ?></td>
-                        <td><?= htmlentities($r['space_description']) ?></td>
-                        <td><?= htmlentities($r['image_path']) ?></td>
-                        <td><?= htmlentities($r['space_time']) ?></td>
-                        <td><?= htmlentities($r['max_people']) ?></td>
-                        <td><?= htmlentities($r['tel']) ?></td>
-                        <td><?= htmlentities($r['area']) ?></td>
-                        <td><?= htmlentities($r['address']) ?></td>
-                        <td><?php $status = $r['status']; echo $status == 1 ? "上架中":"下架中";?></td>
-                    </tr>
+                        <tr>
+
+                        </tr>
                     <?php endwhile; ?>
                 </tbody>
             </table>

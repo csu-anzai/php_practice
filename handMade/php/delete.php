@@ -6,10 +6,10 @@ session_start();
 
 require __DIR__ . '/__connect_db.php';
 
-$sid = isset($_GET['sid'])? intval($_GET['sid']):0;
+$sid = isset($_GET['space_sid'])? intval($_GET['space_sid']):0;
 
 if(! empty ($sid)){
-    $sql = "DELETE FROM `space_list` WHERE `sid`=$sid";
+    $sql = "DELETE FROM `space_list` WHERE `space_sid`=$sid";
     $pdo->query($sql);
 }
 
