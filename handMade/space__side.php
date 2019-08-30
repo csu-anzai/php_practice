@@ -52,10 +52,10 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="sample-pages">
                         <li>
-                            <a href="#" target="_blank">自己</a>
+                            <a href="space_insert.php" >新增</a>
                         </li>
                         <li>
-                            <a href="#" target="_blank">key</a>
+                            <a href="space_list.php" >管理</a>
                         </li>
                         <li>
                             <a href="#" target="_blank">自己</a>

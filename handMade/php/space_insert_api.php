@@ -106,6 +106,7 @@ if ($stmt->rowCount() > 0) {
 } else {
     $result['code'] = 420;
     $result['info'] = '新增失敗';
+    $result['error'] = $sql;
 }
 
 echo json_encode($result, JSON_UNESCAPED_UNICODE);

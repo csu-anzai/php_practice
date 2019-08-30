@@ -7,7 +7,7 @@ $t_sql = "SELECT COUNT(1) FROM `space_list`";
 $t_stmt = $pdo->query($t_sql);
 $totalRows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 $per_page = 3;
-$totalPages = ceil($totalRows / $per_page) ? $totalRows / $per_page : 1;
+$totalPages = ceil($totalRows / $per_page) ? ceil($totalRows / $per_page) : 1;
 if ($page < 1) {
     header('Location:space_list.php');
     exit;
@@ -44,6 +44,9 @@ $stmt = $pdo->query($sql);
 
                         <li class="nav-item <?= $page_name == 'data_list_page' ? 'active' : '' ?> ">
                             <a class="nav-link" href="data_list_page.php">下架中</a>
+                        </li>
+                        <li class="nav-item <?= $page_name == 'data_list_page' ? 'active' : '' ?> ">
+                            <a class="nav-link" href="data_list_page.php"></a>
                         </li>
                     </ul>
                 </div>
@@ -91,18 +94,12 @@ $stmt = $pdo->query($sql);
                 $i = 0;
                 ?>
             <div class="card m-5" style="width: 20rem;">
-                <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
-                    <div class="carousel-inner">
-                        <?php $i = 0; ?>
-                        <?php foreach ($v as $a) : ?>
-                            <div class="carousel-item <?= $i == 0 ? "active" : " "; ?>  " data-interval="3000">
-                                <img src="php/uploads/<?= $a; ?>" class="d-block w-100" alt="..." max-height="600px">
-                            </div>
-                            <?php $i = $i + 1; ?>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
                 <div class="card-body">
+                    <?php foreach ($v as $a) : ?>   
+                    <div class="m-3">
+                        <img src="php/uploads/<?= $a ?>" class="d-block w-100" alt="..." max-height="800px">
+                    </div>
+                    <?php endforeach; ?>
                     <h5 class="card-title">空間名稱</h5>
                     <p class="card-text"><?= htmlentities($r['space_name']); ?></p>
                     <li class="list-group-item">提供時間 :<?= htmlentities($r['space_time']) ?></li>

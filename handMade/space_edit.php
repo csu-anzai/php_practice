@@ -44,7 +44,7 @@ $row = $pdo->query($sql)->fetch();
                     </div>
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="image_path" name="space_image_path" aria-describedby="emailHelp" placeholder="Enter birthday" value="aa">
+                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" value="<?=$row['space_image_path']?>" multiple>
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">

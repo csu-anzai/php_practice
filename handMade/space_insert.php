@@ -22,7 +22,8 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     </div>
                     <div class="form-group">
                         <label for="logo_path">LOGO上傳</label>
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
+                        <img id="output" height="200" style="display:none">
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email"  onchange="openFile(event)">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
@@ -32,7 +33,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     </div>
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" value="aa" multiple>
+                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" multiple >
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
@@ -65,7 +66,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
                     $stmt = $pdo->query($sql); ?>
                     <select class="custom-select" name="space_area">
-                        <option selected>地區</option>
+                        <option selected value="">地區</option>
                         <?php while ($r = $stmt->fetch()) : ?>
                             <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
                         <?php endwhile; ?>
@@ -159,6 +160,20 @@ require_once __DIR__ . '/php/space__connect_db.php';
 
         return false;
     }
+
+
+    //縮圖
+    function openFile(event){
+     var input = event.target; //取得上傳檔案
+    var reader = new FileReader(); //建立FileReader物件
+
+    reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+    reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
 </script>
 <script>
 </script>
