@@ -19,16 +19,33 @@ $exts = [
     'image/jpeg' => '.jpg',
 ];
 
+
+// if (!empty($_FILES['space_image_path'])) {
+// foreach ($_FILES['space_image_path']['name'] as $k => $v) {
+//     $new_filename_space = $_FILES['space_image_path']['name'][$k];
+//     $new_ext_space = $allowed_types[$_FILES['space_image_path']['type'][$k]];
+//     move_uploaded_file($_FILES['space_image_path']['tmp_name'][$k], $upload_dir . $new_filename_space . $new_ext_space);
+//     $pic_array[] = $new_filename . $new_ext;
+// }
+// }
+
+
 if (!empty($_FILES['space_logo_path']) && !empty($_FILES['space_image_path'])) {
-    if (in_array($_FILES['space_logo_path']['type'], $allowed_types)) {
-        $new_filename = sha1(uniqid() . $_FILES['space_logo_path']['name']);
-        $new_ext = $exts[$_FILES['space_logo_path']['type']];
-        $new_filename_space = sha1(uniqid() . $_FILES['space_image_path']['name']);
-        $new_ext_space = $exts[$_FILES['space_image_path']['type']];
-        move_uploaded_file($_FILES['space_logo_path']['tmp_name'], $upload_dir . $new_filename . $new_ext);
-        move_uploaded_file($_FILES['space_image_path']['tmp_name'], $upload_dir . $new_filename_space . $new_ext_space);
+    $new_filename = sha1(uniqid() . $_FILES['space_logo_path']['name']);
+    $new_ext = $exts[$_FILES['space_logo_path']['type']];
+    // $new_filename_space = sha1(uniqid() . $_FILES['space_image_path']['name']);
+    // $new_ext_space = $exts[$_FILES['space_image_path']['type']];
+    move_uploaded_file($_FILES['space_logo_path']['tmp_name'], $upload_dir . $new_filename . $new_ext);
+    // move_uploaded_file($_FILES['space_image_path']['tmp_name'], $upload_dir . $new_filename_space . $new_ext_space);
+    foreach ($_FILES['space_image_path']['name'] as $k => $v) {
+        $new_filename_space = sha1(uniqid().$_FILES['space_image_path']['name'][$k]);
+        $new_ext_space = $exts[$_FILES['space_image_path']['type'][$k]];
+        move_uploaded_file($_FILES['space_image_path']['tmp_name'][$k], $upload_dir . $new_filename_space . $new_ext_space);
+        $pic_array[] = $new_filename_space . $new_ext_space;
     }
 }
+$array_pic = json_encode($pic_array, JSON_UNESCAPED_UNICODE);
+
 // 
 $result = [
     'success' => false,
@@ -44,7 +61,7 @@ if (empty($_POST['space_name'])) {
     exit;
 }
 
-$server = !empty($_POST['space_service'])?json_encode($_POST['space_service'], JSON_UNESCAPED_UNICODE):"[]";
+$server = !empty($_POST['space_service']) ? json_encode($_POST['space_service'], JSON_UNESCAPED_UNICODE) : "[]";
 //場地CHECKBOX用
 
 $sql = "INSERT INTO `space_list`(
@@ -70,7 +87,7 @@ $stmt->execute([
     $_POST['space_name'],
     $new_filename . $new_ext,
     $_POST['space_description'],
-    $new_filename_space . $new_ext_space,
+    $array_pic,
     $_POST['space_time'],
     $_POST['space_max_people'],
     $_POST['space_tel'],
