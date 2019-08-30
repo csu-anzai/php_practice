@@ -42,10 +42,10 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="sample-pages">
                         <li>
-                            <a href="insert.php">上架</a>
+                            <a href="space_insert.php">上架</a>
                         </li>
                         <li>
-                            <a href="data_list.php">編輯</a>
+                            <a href="space_list.php">編輯</a>
                         </li>
                     </ul>
                 </li>

@@ -1,7 +1,7 @@
 <?php
 
 // require __DIR__. '/_admin_required.php';
-require __DIR__. '/__connect_db.php';
+require __DIR__. '/space__connect_db.php';
 // 照片處理
 $upload_dir = __DIR__ . '/uploads/';
 

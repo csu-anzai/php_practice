@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/php/__connect_db.php';
-$page_name = 'data_list';
+require_once __DIR__ . '/php/space__connect_db.php';
+$page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list`";
 $t_stmt = $pdo->query($t_sql);
@@ -9,12 +9,12 @@ $totalRows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 $per_page = 5;
 $totalPages = ceil($totalRows / $per_page) ? ceil($totalRows / $per_page) : 1;
 if ($page < 1) {
-    header('Location:data_list.php');
+    header('Location:space_list.php');
     exit;
 } 
 
 if ($page > $totalPages) {
-    header('Location:data_list.php?page='.$totalPages);
+    header('Location:space_list.php?page='.$totalPages);
     exit;
 }
 // $sql = ""
@@ -105,7 +105,7 @@ $stmt = $pdo->query($sql);
                             <!-- <td><?php $status = $r['space_status'];
                                             echo $status == 1 ? "上架中" : "下架中"; ?></td> -->
                             <td>
-                                <a href="edit.php?space_sid=<?= $r['space_sid'] ?>">
+                                <a href="space_edit.php?space_sid=<?= $r['space_sid'] ?>">
                                     <i class="fas fa-edit"></i>
                                 </a>
                             </td>
@@ -121,7 +121,7 @@ $stmt = $pdo->query($sql);
 <script>
     function delete_one(sid) {
         if (confirm(`要刪除第${sid}筆資料嗎？`)) {
-            location.href = 'php/delete.php?space_sid=' + sid;
+            location.href = 'php/space_delete.php?space_sid=' + sid;
         }
     }
 </script>

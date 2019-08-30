@@ -1,10 +1,23 @@
 <?php
-require_once __DIR__ . '/php/__connect_db.php';
+// require __DIR__. '/_admin_required.php';
+require_once __DIR__ . '/php/space__connect_db.php';
+?>
+<?php
+$sid = isset($_GET['space_sid']) ? intval($_GET['space_sid']) : 0;
+if (empty($sid)) {
+    header('Location:space_list.php');
+    exit;
+}
+$sql = " SELECT * FROM `space_list` WHERE `space_sid`=$sid ";
+$row = $pdo->query($sql)->fetch();
+
+
 ?>
 <?php include __DIR__ . '/__html_head.php'; ?>
 <?php include __DIR__ . '/__navbar.php'; ?>
 <div class="page-content-wrapper">
     <!--  -->
+    <input type="hidden" name="space_sid" value="<?= $row['space_sid'] ?>">
     <div class="container-fluid" id='wert'>
         <div class="row">
             <div class="col">
@@ -90,7 +103,7 @@ require_once __DIR__ . '/php/__connect_db.php';
                                 // $fruit_d = empty($_POST['space_service']) ? [] : $_POST['space_service'];
                                 foreach ($data1 as $k => $v) : ?>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox"value="<?= $k ?>" name="space_service[]" >
+                                        <input class="form-check-input" type="checkbox" value="<?= $k ?>" name="space_service[]">
                                         <label class="form-check-label" for="<?= $k ?>"><?= $v ?></label>
                                     </div>
                                 <?php endforeach; ?>
@@ -141,7 +154,7 @@ require_once __DIR__ . '/php/__connect_db.php';
 
                 let fd = new FormData(document.form1); //要傳的資料
 
-                fetch('php/data_insert_api.php', {
+                fetch('php/space_insert_api.php', {
                         method: 'POST',
                         body: fd, //要傳的資料
                     })

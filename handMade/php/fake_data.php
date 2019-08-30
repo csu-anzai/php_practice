@@ -1,7 +1,7 @@
 <?php
 die;
 
-require __DIR__ . '/__connect_db.php';
+require __DIR__ . '/space__connect_db.php';
 
 for ($i = 0; $i <= 500; $i++) {
     $pdo->query("INSERT INTO `space_list`(
