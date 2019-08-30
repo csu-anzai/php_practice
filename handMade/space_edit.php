@@ -17,7 +17,6 @@ $row = $pdo->query($sql)->fetch();
 <?php include __DIR__ . '/__navbar.php'; ?>
 <div class="page-content-wrapper">
     <!--  -->
-    <input type="hidden" name="space_sid" value="<?= $row['space_sid'] ?>">
     <div class="container-fluid" id='wert'>
         <div class="row">
             <div class="col">
@@ -26,6 +25,7 @@ $row = $pdo->query($sql)->fetch();
         </div>
         <h5>新增資料</h5>
         <form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
+        <input type="hidden" name="space_sid" value="<?= $row['space_sid'] ?>">
             <div class="row">
                 <div class="col-lg-4">
                     <div class="card">
@@ -154,7 +154,7 @@ $row = $pdo->query($sql)->fetch();
 
                 let fd = new FormData(document.form1); //要傳的資料
 
-                fetch('php/space_insert_api.php', {
+                fetch('php/space_edit_api.php', {
                         method: 'POST',
                         body: fd, //要傳的資料
                     })

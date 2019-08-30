@@ -90,7 +90,7 @@ $stmt = $pdo->query($sql);
                             <td>
                                 <a href="javascript:delete_one(<?= $r['space_sid'] ?>)">
                                     <i class="fas fa-trash-alt"></i>
-                                </a>
+                                </a>                           
                             </td>
                             <td><?= htmlentities($r['space_sid']) ?></td>
                             <td><?= htmlentities($r['space_name']) ?></td>
