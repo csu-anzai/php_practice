@@ -11,7 +11,6 @@ require_once __DIR__ . '/php/space__connect_db.php';
 </div>
 <h5>新增資料</h5>
 <form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
-
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
@@ -21,26 +20,22 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
-                    <!-- <input id="browse" type="file" onchange="previewFiles()" multiple> -->
-                   
                     <div class="form-group">
-                        <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday"  onchange="previewFiles()" multiple>
-                        <small id="emailHelp" class="form-text"></small>
-                        <div id="preview" style="width:100px;"></div>
-                    </div>
-                    <div class="form-group">
-                        <label for="logo_path">LOGO上傳</label><br>
-                        <img id='logo_img' src="" height="200" alt="Image preview...">
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
+                        <label for="logo_path">LOGO上傳</label>
+                        <img id="output" height="200" style="display:none">
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email"  onchange="openFile(event)">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="space_description">環境介紹</label>
                         <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
-
+                        <small id="emailHelp" class="form-text"></small>
                     </div>
-
+                    <div class="form-group">
+                        <label for="image_path">圖片上傳</label>
+                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" multiple >
+                        <small id="emailHelp" class="form-text"></small>
+                    </div>
                     <div class="form-group">
                         <label for="space_time">提供時間</label>
                         <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="2019-03-02">
@@ -71,7 +66,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
                     $stmt = $pdo->query($sql); ?>
                     <select class="custom-select" name="space_area">
-                        <option selected value="1">地區</option>
+                        <option selected value="">地區</option>
                         <?php while ($r = $stmt->fetch()) : ?>
                             <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
                         <?php endwhile; ?>
@@ -168,48 +163,18 @@ require_once __DIR__ . '/php/space__connect_db.php';
 
 
     //縮圖
-    function previewFile() {
-        var preview = document.querySelector('#logo_img');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
+    function openFile(event){
+     var input = event.target; //取得上傳檔案
+    var reader = new FileReader(); //建立FileReader物件
 
-        reader.addEventListener("load", function() {
-            preview.src = reader.result;
-        }, false);
+    reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
 
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
-    //多圖
-    function previewFiles() {
-
-        var preview = document.querySelector('#preview');
-        var files = document.querySelector('input[type=file]').files;
-
-        function readAndPreview(file) {
-
-            // Make sure `file.name` matches our extensions criteria
-            if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
-                var reader = new FileReader();
-
-                reader.addEventListener("load", function() {
-                    var image = new Image();
-                    image.height = 100;
-                    image.title = file.name;
-                    image.src = this.result;
-                    preview.appendChild(image);
-                }, false);
-
-                reader.readAsDataURL(file);
-            }
-
-        }
-
-        if (files) {
-            [].forEach.call(files, readAndPreview);
-        }
-
-    }
+    reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
+    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+    $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+  };
+}
+</script>
+<script>
 </script>
 <?php include __DIR__ . '/space__footer.php'; ?>
