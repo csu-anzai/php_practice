@@ -14,16 +14,18 @@ require_once __DIR__ . '/php/space__connect_db.php';
     </div>
 </div>
 <h5>新增資料</h5>
-<form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
+<form class="" 　onsubmit="return checkForm()" name="form1" enctype="multipart/form-data" autocomplete="on">
+
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
                     <div class="form-group">
                         <label for="space_name">空間名稱</label>
-                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
+                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
+                    <!-- <input id="browse" type="file" onchange="previewFiles()" multiple> -->
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
                         <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
@@ -36,11 +38,13 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
+
                     <div class="form-group">
                         <label for="space_description">環境介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
-                        <small id="emailHelp" class="form-text"></small>
+                        <textarea class="form-control" 　 cols="50" rows="5" id="space_description" name="space_description" aria-describedby="emailHelp" value="尚未輸入">
+                        </textarea>
                     </div>
+
                     <div class="form-group">
                         <label for="space_time">提供時間</label>
                         <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="2019-03-02">
@@ -70,10 +74,13 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     <?php
                     $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
                     $stmt = $pdo->query($sql); ?>
-                    <select class="custom-select" name="space_area">
+                    <label for="space_area">地區</label>
+                    <select class="custom-select" name="space_area" id="space_area">
+                        <option selected value="1">基隆市</option>
                         <?php while ($r = $stmt->fetch()) : ?>
                             <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
                         <?php endwhile; ?>
+
                     </select>
                     <div class="form-group">
                         <label for="service">環境氣氛</label>
@@ -106,8 +113,8 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <label for="status">直接上架</label>
                         <!-- <input type="text" class="form-control" id="status" name="space_status" aria-describedby="emailHelp" placeholder="Enter address" value="1"> -->
                         <select class="custom-select" name="space_status">
-                            <option value="0">上架</option>
-                            <option value="1">下架</option>
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
                         </select>
                         <small id="emailHelp" class="form-text"></small>
                     </div>
