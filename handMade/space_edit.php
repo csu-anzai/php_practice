@@ -27,24 +27,28 @@ $row = $pdo->query($sql)->fetch();
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
+                    
                     <div class="form-group">
                         <label for="space_name">空間名稱</label>
                         <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
-                        <label for="logo_path">LOGO上傳</label>
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="space_description">環境介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
+                        <label for="logo_path">LOGO上傳</label><br>
+                        <img id='logo_img' src="" height="200" alt="Image preview...">
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" value="<?=$row['space_image_path']?>" multiple>
+                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
+                        <small id="emailHelp" class="form-text"></small>
+                        <div id="preview" style="width:100px;"></div>
+                    </div>
+                  
+                    <div class="form-group">
+                        <label for="space_description">環境介紹</label>
+                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
@@ -170,6 +174,52 @@ $row = $pdo->query($sql)->fetch();
             });
 
         return false;
+    }
+
+
+    //縮圖
+    function previewFile() {
+        var preview = document.querySelector('#logo_img');
+        var file = document.querySelector('input[type=file]').files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    }
+    //多圖
+    function previewFiles() {
+
+        var preview = document.querySelector('#preview');
+        var files = document.querySelector('input[type=file]').files;
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                var reader = new FileReader();
+
+                reader.addEventListener("load", function() {
+                    var image = new Image();
+                    image.height = 100;
+                    image.title = file.name;
+                    image.src = this.result;
+                    preview.appendChild(image);
+                }, false);
+
+                reader.readAsDataURL(file);
+            }
+
+        }
+
+        if (files) {
+            [].forEach.call(files, readAndPreview);
+        }
+
     }
 </script>
 <script>

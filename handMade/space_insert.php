@@ -22,18 +22,17 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <!-- <input id="browse" type="file" onchange="previewFiles()" multiple> -->
-                   
-                    <div class="form-group">
-                        <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday"  onchange="previewFiles()" multiple>
-                        <small id="emailHelp" class="form-text"></small>
-                        <div id="preview" style="width:100px;"></div>
-                    </div>
                     <div class="form-group">
                         <label for="logo_path">LOGO上傳</label><br>
                         <img id='logo_img' src="" height="200" alt="Image preview...">
                         <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
                         <small id="emailHelp" class="form-text"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="image_path">圖片上傳</label>
+                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday"  onchange="previewFiles()" multiple>
+                        <small id="emailHelp" class="form-text"></small>
+                        <div id="preview" style="width:100px;"></div>
                     </div>
                     <div class="form-group">
                         <label for="space_description">環境介紹</label>
