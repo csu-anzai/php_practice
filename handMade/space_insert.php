@@ -3,14 +3,18 @@ require_once __DIR__ . '/php/space__connect_db.php';
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 <?php include __DIR__ . '/space__side.php'; ?>
-
+<style>
+    #preview img {
+        margin: 10px 0 10px 0;
+    }
+</style>
 <div class="row">
     <div class="col">
         <div class="alert alert-primary" role="alert" id="info-bar" style="display: none"></div>
     </div>
 </div>
 <h5>新增資料</h5>
-<form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
+<form class="" 　onsubmit="return checkForm()" name="form1" enctype="multipart/form-data" autocomplete="on">
 
     <div class="row">
         <div class="col-lg-4">
@@ -18,26 +22,27 @@ require_once __DIR__ . '/php/space__connect_db.php';
                 <div class="card-body">
                     <div class="form-group">
                         <label for="space_name">空間名稱</label>
-                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
+                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <!-- <input id="browse" type="file" onchange="previewFiles()" multiple> -->
                     <div class="form-group">
-                        <label for="logo_path">LOGO上傳</label><br>
-                        <img id='logo_img' src="" height="200" alt="Image preview...">
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday"  onchange="previewFiles()" multiple>
+                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
                         <small id="emailHelp" class="form-text"></small>
                         <div id="preview" style="width:100px;"></div>
                     </div>
                     <div class="form-group">
-                        <label for="space_description">環境介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
+                        <label for="logo_path">LOGO上傳</label>
+                        <img id='logo_img' src="" height="200">
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text"></small>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="space_description">環境介紹</label>
+                        <textarea class="form-control" 　 cols="50" rows="5" id="space_description" name="space_description" aria-describedby="emailHelp" value="尚未輸入">
+                        </textarea>
                     </div>
 
                     <div class="form-group">
@@ -69,8 +74,9 @@ require_once __DIR__ . '/php/space__connect_db.php';
                     <?php
                     $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
                     $stmt = $pdo->query($sql); ?>
-                    <select class="custom-select" name="space_area">
-                        <option selected value="1">地區</option>
+                    <label for="space_area">地區</label>
+                    <select class="custom-select" name="space_area" id="space_area">
+                        <option selected value="1">基隆市</option>
                         <?php while ($r = $stmt->fetch()) : ?>
                             <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
                         <?php endwhile; ?>
@@ -107,8 +113,8 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <label for="status">直接上架</label>
                         <!-- <input type="text" class="form-control" id="status" name="space_status" aria-describedby="emailHelp" placeholder="Enter address" value="1"> -->
                         <select class="custom-select" name="space_status">
-                            <option value="0">上架</option>
-                            <option value="1">下架</option>
+                            <option value="1">上架</option>
+                            <option value="0">下架</option>
                         </select>
                         <small id="emailHelp" class="form-text"></small>
                     </div>
@@ -133,6 +139,10 @@ require_once __DIR__ . '/php/space__connect_db.php';
     let space_name = document.querySelector('#space_name');
     // let i, s, item;
 
+
+
+
+    // 
     function checkForm() {
 
         if (space_name.value.length < 2) {
@@ -166,20 +176,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
     }
 
 
-    //縮圖
-    function previewFile() {
-        var preview = document.querySelector('#logo_img');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
 
-        reader.addEventListener("load", function() {
-            preview.src = reader.result;
-        }, false);
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
     //多圖
     function previewFiles() {
 

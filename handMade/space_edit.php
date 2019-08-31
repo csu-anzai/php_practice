@@ -10,60 +10,63 @@ if (empty($sid)) {
 }
 $sql = " SELECT * FROM `space_list` WHERE `space_sid`=$sid ";
 $row = $pdo->query($sql)->fetch();
-
-
+$sql2  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` WHERE `space_sid`=$sid");
+$row2 = $pdo->query($sql2)->fetch();
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 <?php include __DIR__ . '/space__side.php'; ?>
+<style>
+    #preview img {
+        margin: 10px 0 10px 0;
+    }
+</style>
 <div class="row">
     <div class="col">
         <div class="alert alert-primary" role="alert" id="info-bar" style="display: none"></div>
     </div>
 </div>
-<h5>新增資料</h5>
+<h5>編輯資料</h5>
 <form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
     <input type="hidden" name="space_sid" value="<?= $row['space_sid'] ?>">
     <div class="row">
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-body">
-                    
                     <div class="form-group">
                         <label for="space_name">空間名稱</label>
-                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="logo_path">LOGO上傳</label><br>
-                        <img id='logo_img' src="" height="200" alt="Image preview...">
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
+                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="<?= $row2['space_name'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
+                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple  value="">
                         <small id="emailHelp" class="form-text"></small>
                         <div id="preview" style="width:100px;"></div>
                     </div>
-                  
                     <div class="form-group">
-                        <label for="space_description">環境介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
+                        <label for="logo_path">LOGO上傳</label><br>
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
                         <small id="emailHelp" class="form-text"></small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="space_description">詳細介紹</label>
+                        <textarea class="form-control" 　cols="50" rows="5" id="space_description" name="space_description" aria-describedby="emailHelp" value="<?= $row['space_description'] ?>">
+                        </textarea>
                     </div>
                     <div class="form-group">
                         <label for="space_time">提供時間</label>
-                        <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="2019-03-02">
+                        <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_time'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="max_people">人數</label>
-                        <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="Enter address" value="50">
+                        <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_max_people'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="Enter address" value="0976562513">
+                        <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="Enter address"  value="<?= $row['space_tel'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                 </div>
@@ -79,15 +82,17 @@ $row = $pdo->query($sql)->fetch();
                             </div> -->
                     <?php
                     $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
-                    $stmt = $pdo->query($sql); ?>
-                    <select class="custom-select" name="space_area">
-                        <option selected>地區</option>
+                    $stmt = $pdo->query($sql); 
+                    ?>
+                    <label for="space_area">地區</label>
+                    <select class="custom-select" name="space_area" id="space_area">
                         <?php while ($r = $stmt->fetch()) : ?>
-                            <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
+                            <option value="<?= $r['area_sid']?>" >
+                             <?= $r['taiwan_city'] ?>
+                            </option>
                         <?php endwhile; ?>
-
                     </select>
-                    <div class="form-group">
+                 <div class="form-group">
                         <label for="service">環境氣氛</label>
                         <!-- <input type="text" class="form-control" id="service" name="space_service" aria-describedby="emailHelp" placeholder="Enter address" value="aa">
                                 <small id="emailHelp" class="form-text"></small> -->
@@ -129,7 +134,7 @@ $row = $pdo->query($sql)->fetch();
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
-                        <label for="title_description">詳細內容</label>
+                        <label for="title_description">標題內容</label>
                         <input type="text" class="form-control" id="title_description" name="space_title_description" aria-describedby="emailHelp" placeholder="Enter address">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
@@ -155,7 +160,7 @@ $row = $pdo->query($sql)->fetch();
 
         let fd = new FormData(document.form1); //要傳的資料
 
-        fetch('php/space_edit_api.php', {
+        fetch('php/space_insert_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
             })
@@ -176,21 +181,6 @@ $row = $pdo->query($sql)->fetch();
         return false;
     }
 
-
-    //縮圖
-    function previewFile() {
-        var preview = document.querySelector('#logo_img');
-        var file = document.querySelector('input[type=file]').files[0];
-        var reader = new FileReader();
-
-        reader.addEventListener("load", function() {
-            preview.src = reader.result;
-        }, false);
-
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
     //多圖
     function previewFiles() {
 
@@ -221,7 +211,5 @@ $row = $pdo->query($sql)->fetch();
         }
 
     }
-</script>
-<script>
 </script>
 <?php include __DIR__ . '/space__footer.php'; ?>
