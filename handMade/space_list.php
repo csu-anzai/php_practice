@@ -84,7 +84,7 @@ $stmt = $pdo->query($sql);
             <nav>
                 <ul class="navbar-nav">
                     <li class="nav-item <?= $page_name == '' ? 'active' : '' ?> ">
-                        <a class="nav-link" href=""><button type="button" class="btn btn-outline-warning" style="width:100px;">批量刪除</button></a>
+                    <button  type="submit" form="my-form" class="btn btn-outline-warning" style="width:100px;" onclick="return confirm('確定刪除嗎？')">批量刪除</button>
                     </li>
                 </ul>
             </nav>
@@ -109,7 +109,7 @@ $stmt = $pdo->query($sql);
     </nav>
 </div>
 
-
+<form action="php/space_deleteALL.php" method="post" id="my-form">
 <div class="row">
     <div class="col d-flex flex-wrap     justify-content-center ">
         <?php while ($r = $stmt->fetch()) : ?>
@@ -117,6 +117,9 @@ $stmt = $pdo->query($sql);
                 $i = 0;
                 ?>
             <div class="card m-5  cardshadows" style="width: 28rem; background:#1B1B27;">
+                <label class="fontsize"　for="space_sid">批量刪除勾選</label>
+                <input style="width:50px"   type="checkbox" name="space_sid[]" id="space_sid" value="<?=$r['space_sid']?>">
+            
                 <div class="card-body">
                     <div style="height:250px; overflow:hidden;">
                         <h3 style="color:#C2301F;">LOGO</h3>
@@ -204,6 +207,7 @@ $stmt = $pdo->query($sql);
         <?php endwhile; ?>
     </div>
 </div>
+</form>
 <div class="row">
     <div class="col">
         <ul class="pagination  mt-3 justify-content-center">
@@ -241,6 +245,7 @@ $stmt = $pdo->query($sql);
 </div>
 
 <script>
+
     function delete_one(sid) {
         if (confirm(`要刪除第${sid}筆資料嗎？`)) {
             location.href = 'php/space_delete.php?space_sid=' + sid;

@@ -41,7 +41,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="d-flex justify-content-between">
-                        <div class="form-group d-flex align-items-baseline" style="width:45%">
+                        <div class="form-group d-flex align-items-baseline" style="width:50%">
                             <label for="space_name" style="width:115px;">空間名稱</label>
                             <input type="text" class="form-control" id="space_name" name="space_name" placeholder="請輸入名稱" >
                             <small id="emailHelp" class="form-text"></small>
@@ -129,8 +129,8 @@ require_once __DIR__ . '/php/space__connect_db.php';
                             </select>
                             <small id="emailHelp" class="form-text"></small>
                         </div>
-                        <div class="form-group d-flex align-items-baseline" style="width:62.8%;">
-                            <span for="price" style='width:70px;'>價格</span>
+                        <div class="form-group d-flex align-items-baseline" style="width:65%;">
+                            <label for="price" style='width:100px;'>價格</label>
                             <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="請輸入價格">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
@@ -153,10 +153,10 @@ require_once __DIR__ . '/php/space__connect_db.php';
     // 
     function checkForm() {
 
-        if (space_name.value.length < 2) {
+        if (space_name.value.length < 1) {
+            alert('欄位不正確');
             space_name.style.border = '1px solid red';
-            space_name.closest('.form-group').querySelector('small').innerText = '請填寫正確姓名';
-
+            // space_name.closest('.form-group').querySelector('small').innerText = '錯誤';
         }
 
 
