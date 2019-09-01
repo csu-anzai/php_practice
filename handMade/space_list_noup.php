@@ -18,7 +18,7 @@ if ($page > $totalPages) {
     exit;
 }
 // $sql = ""
-$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number`  ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid`  WHERE  `space_list`.`space_status`=0   ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);

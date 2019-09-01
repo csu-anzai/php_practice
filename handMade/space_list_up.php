@@ -18,7 +18,7 @@ if ($page > $totalPages) {
     exit;
 }
 // $sql = ""
-$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number`  ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid`  WHERE  `space_list`.`space_status`=1   ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
@@ -30,7 +30,7 @@ $stmt = $pdo->query($sql);
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-        margin-top: 10px;
+        margin-top:10px;
         position: relative;
     }
 
@@ -60,22 +60,20 @@ $stmt = $pdo->query($sql);
         box-shadow: 0px 0px 80px #000000;
         transition: 0.5s
     }
-
-    .cardshadows:hover {
+    .cardshadows:hover{
         transform: scale(1.1);
         z-index: 1;
     }
 
     .textshadows {
         text-shadow: 0px 0px 5px #461922;
-
+       
     }
-
-    .positionbottom {
+    .positionbottom{
         position: absolute;
         bottom: 0;
         left: 25%;
-
+        
     }
 </style>
 <div>
@@ -157,22 +155,22 @@ $stmt = $pdo->query($sql);
                     <div class="fontsize text-center">
                         <div>環境風格</div>
                         <div class=" text-truncate fontsize text-center" id="space_service"> <?php foreach ($space_service  as $a) {
-                                                                                                        switch ($a) {
-                                                                                                            case 1:
-                                                                                                                $a = '溫馨 ';
-                                                                                                                break;
-                                                                                                            case 2:
-                                                                                                                $a = '高雅 ';
-                                                                                                                break;
-                                                                                                            case 3:
-                                                                                                                $a = '古典 ';
-                                                                                                                break;
-                                                                                                            case 4:
-                                                                                                                $a = '時尚 ';
-                                                                                                                break;
-                                                                                                        }
-                                                                                                        echo $a;
-                                                                                                    }  ?></div>
+                                                                                                    switch ($a) {
+                                                                                                        case 1:
+                                                                                                            $a = '溫馨 ';
+                                                                                                            break;
+                                                                                                        case 2:
+                                                                                                            $a = '高雅 ';
+                                                                                                            break;
+                                                                                                        case 3:
+                                                                                                            $a = '古典 ';
+                                                                                                            break;
+                                                                                                        case 4:
+                                                                                                            $a = '時尚 ';
+                                                                                                            break;
+                                                                                                    }
+                                                                                                    echo $a;
+                                                                                                }  ?></div>
                         <div class="d-flex justify-content-around">
                         </div>
                     </div>
@@ -180,7 +178,7 @@ $stmt = $pdo->query($sql);
                         <div class="fontsize text-center">
                             <div>上架狀態</div>
                             <div> <?php $status = $r['space_status'];
-                                        echo $status == 1 ? "上架中" : "下架中"; ?></div>
+                                                            echo $status == 1 ? "上架中" : "下架中"; ?></div>
                         </div>
                         <div class="fontsize text-center">
                             <div class="fontsize">更新時間 </div>
