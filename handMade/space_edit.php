@@ -39,34 +39,33 @@ $row2 = $pdo->query($sql2)->fetch();
                     </div>
                     <div class="form-group">
                         <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple  value="">
+                        <input type="file" class="form-control" id="browse" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple value="<?= $row2['space_image_path'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                         <div id="preview" style="width:100px;"></div>
                     </div>
                     <div class="form-group">
                         <label for="logo_path">LOGO上傳</label><br>
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $row2['space_logo_path'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
-
                     <div class="form-group">
                         <label for="space_description">詳細介紹</label>
-                        <textarea class="form-control" 　cols="50" rows="5" id="space_description" name="space_description" aria-describedby="emailHelp" value="<?= $row['space_description'] ?>">
-                        </textarea>
+                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="<?= $row2['space_description'] ?>">
+                        <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="space_time">提供時間</label>
-                        <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_time'] ?>">
+                        <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row2['space_time'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="max_people">人數</label>
-                        <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_max_people'] ?>">
+                        <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row2['space_max_people'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="Enter address"  value="<?= $row['space_tel'] ?>">
+                        <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="Enter address"  value="<?= $row2['space_tel'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                 </div>
@@ -81,13 +80,17 @@ $row2 = $pdo->query($sql2)->fetch();
                                 <small id="emailHelp" class="form-text"></small>
                             </div> -->
                     <?php
-                    $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
-                    $stmt = $pdo->query($sql); 
+                    $sql3  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
+                    $stmt3 = $pdo->query($sql3); 
                     ?>
                     <label for="space_area">地區</label>
                     <select class="custom-select" name="space_area" id="space_area">
-                        <?php while ($r = $stmt->fetch()) : ?>
-                            <option value="<?= $r['area_sid']?>" >
+                        <?php while ($r = $stmt3->fetch()) : ?>
+                            <option value="<?= $r['area_sid']?>" 
+                            <?=
+                            $r['area_sid'] == $row2['space_area'] ? 'selected' : ' ';
+                            ?>
+                            >
                              <?= $r['taiwan_city'] ?>
                             </option>
                         <?php endwhile; ?>
@@ -103,39 +106,56 @@ $row2 = $pdo->query($sql2)->fetch();
                             '3' => '古典',
                             '4' => '時尚',
                         ];
-                        // $fruit_a = empty($_POST['space_service']) ? [] : $_POST['space_service'];
-                        // $fruit_b = empty($_POST['space_service']) ? [] : $_POST['space_service'];
-                        // $fruit_c = empty($_POST['space_service']) ? [] : $_POST['space_service'];
-                        // $fruit_d = empty($_POST['space_service']) ? [] : $_POST['space_service'];
+                       
                         foreach ($data1 as $k => $v) : ?>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" value="<?= $k ?>" name="space_service[]">
+                                <input class="form-check-input" type="checkbox" value="<?= $k ?>" name="space_service[]"
+                                        <?php 
+                                         foreach(json_decode($row2['space_service']) as $a){
+                                                echo $k == $a ? 'checked':'' ;
+                                           }
+                                        ?>
+                                >
                                 <label class="form-check-label" for="<?= $k ?>"><?= $v ?></label>
                             </div>
-                        <?php endforeach; ?>
+                        <?php endforeach;  ?>
+                       <?php 
+                     
+                       
+                       ?>
                     </div>
                     <div class="form-group">
                         <label for="address">地址</label>
-                        <input type="text" class="form-control" id="address" name="space_address" aria-describedby="emailHelp" placeholder="Enter address" value="aa">
+                        <input type="text" class="form-control" id="address" name="space_address" aria-describedby="emailHelp" placeholder="Enter address"  value="<?= $row2['space_address'] ?>" >
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="status">直接上架</label>
                         <!-- <input type="text" class="form-control" id="status" name="space_status" aria-describedby="emailHelp" placeholder="Enter address" value="1"> -->
                         <select class="custom-select" name="space_status">
-                            <option value="0">上架</option>
-                            <option value="1">下架</option>
+                            <option value="0"
+                            <?php
+                            $selected = $row2['space_status'];
+                            echo  $selected == 1 ?"selected" : " " ;
+                            ?>
+                            >上架</option>
+                            <option value="1"  
+                            <?php
+                            $selected = $row2['space_status'];
+                            echo $selected == 0 ?  "selected" : " " ;
+                            ?>
+                            >下架</option>
                         </select>
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="price">價格</label>
-                        <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="Enter address" value="500">
+                        <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_price']?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
                         <label for="title_description">標題內容</label>
-                        <input type="text" class="form-control" id="title_description" name="space_title_description" aria-describedby="emailHelp" placeholder="Enter address">
+                        <input type="text" class="form-control" id="title_description" name="space_title_description" aria-describedby="emailHelp" placeholder="Enter address"  value="<?= $row2['space_title_description'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <button type="submit" class="btn btn-primary mt-5 w-100">Submit</button>
@@ -160,7 +180,7 @@ $row2 = $pdo->query($sql2)->fetch();
 
         let fd = new FormData(document.form1); //要傳的資料
 
-        fetch('php/space_insert_api.php', {
+        fetch('php/space_edit_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
             })
