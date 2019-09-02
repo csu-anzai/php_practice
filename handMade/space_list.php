@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list`";
@@ -109,7 +109,7 @@ $stmt = $pdo->query($sql);
     </nav>
 </div>
 
-<form action="php/space_deleteALL.php" method="post" id="my-form">
+<form action="space_deleteALL.php" method="post" id="my-form">
 <div class="row">
     <div class="col d-flex flex-wrap     justify-content-center ">
         <?php while ($r = $stmt->fetch()) : ?>
@@ -124,13 +124,13 @@ $stmt = $pdo->query($sql);
                     <div style="height:250px; overflow:hidden;">
                         <h3 style="color:#C2301F;">LOGO</h3>
                         <div style="position: relative;">
-                            <img id="logoImg" src="php/uploads/<?= htmlentities($r['space_logo_path']); ?>" class="d-block w-100" alt="..." max-height="800px">
+                            <img id="logoImg" src="space_uploads/<?= htmlentities($r['space_logo_path']); ?>" class="d-block w-100" alt="..." max-height="800px">
                         </div>
                     </div>
                     <h3 style="color:#C2301F;">環境圖片</h3>
 
                     <div class="m-3" style="height:200px; overflow:hidden;">
-                        <img src=" php/uploads/<?= $v[0] ?>" class="d-block w-100" max-height="800px">
+                        <img src="space_uploads/<?= $v[0] ?>" class="d-block w-100" max-height="800px">
                     </div>
 
 
@@ -248,7 +248,7 @@ $stmt = $pdo->query($sql);
 
     function delete_one(sid) {
         if (confirm(`要刪除第${sid}筆資料嗎？`)) {
-            location.href = 'php/space_delete.php?space_sid=' + sid;
+            location.href = 'space_delete.php?space_sid=' + sid;
         }
     }
 </script>

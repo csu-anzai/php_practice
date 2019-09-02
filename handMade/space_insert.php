@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 <?php include __DIR__ . '/space__side.php'; ?>
@@ -162,7 +162,7 @@ require_once __DIR__ . '/php/space__connect_db.php';
 
         let fd = new FormData(document.form1); //要傳的資料
 
-        fetch('php/space_insert_api.php', {
+        fetch('space_insert_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
             })

@@ -1,6 +1,6 @@
 <?php
 // require __DIR__. '/_admin_required.php';
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 ?>
 <?php
 $sid = isset($_GET['space_sid']) ? intval($_GET['space_sid']) : 0;
@@ -184,7 +184,7 @@ $row2 = $pdo->query($sql2)->fetch();
 
         let fd = new FormData(document.form1); //要傳的資料
 
-        fetch('php/space_edit_api.php', {
+        fetch('space_edit_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
             })
