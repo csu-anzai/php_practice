@@ -2,137 +2,86 @@
     <nav class="t-header">
         <div class="t-header-brand-wrapper">
             <a href="index.html">
-                <img class="logo-mini" src="img/HB_logo.png" alt="">
-                <img class="logo" src="" alt="">Handmade Baking
+                <h3>HANDBAKE</h3>
+                <img class="logo" src="" alt="">
+                <img class="logo-mini" src="" alt="">
             </a>
         </div>
-        <div class="t-header-content-wrapper">
-            <div class="t-header-content">
-                <button class="t-header-toggler t-header-mobile-toggler d-block d-lg-none">
-                    <i class="mdi mdi-menu"></i>
-                </button>
-                <form action="#" class="t-header-search-box">
-                    <div class="input-group">
-                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Search"
-                            autocomplete="off">
-                        <button class="btn btn-primary" type="submit">搜尋</button>
-                    </div>
-                </form>
 
-            </div>
+        <div class="t-header-brand-wrapper" style="float:right;">
+            <a href="logout.php">
+                <img class="logo" src="" alt="">
+                <img class="logo-mini" src="" alt="">logout
+            </a>
         </div>
     </nav>
-
-
-
     <div class="page-body">
 
         <div class="sidebar">
+            <div class="pic_img">
+
+            </div>
             <div class="user-profile">
-                <div class="display-avatar animated-avatar">
-                    <img class="profile-img img-lg rounded-circle" src="img/user.png" alt="" style="width: 100px;">
+                <div class="display-avatar animated-avatar" style="z-index:1">
+                    <img class="profile-img img-lg rounded-circle" src="img\BIGHEAD.jpeg" alt="shop_image">
                 </div>
                 <div class="info-wrapper">
-                    <p class="user-name">烘焙屋001</p>
-                    <h6 class="display-income">$1,000,00</h6>
+                    <p class="user-name">MEMBERS001</p>
+                    <h6 class="display-income">$10,00</h6>
                 </div>
             </div>
             <ul class="navigation-menu">
                 <li class="nav-category-divider">MAIN</li>
                 <li>
-                    <a href="index.html">
-                        <span class="link-title">儀錶板首頁</span>
-                        <i class="link-icon"></i>
-                    </a>
-                </li>
-                <li>
                     <a href="#sample-pages" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">商品管理</span>
-                        <i class="link-icon"></i>
+                        <i class="link-icon fas fa-id-card"></i>
+
                     </a>
                     <ul class="collapse navigation-submenu" id="sample-pages">
                         <li>
-                            <a href="space_insert.php" >新增</a>
+                            <a href="space_insert.php">上架</a>
                         </li>
                         <li>
-                            <a href="space_list.php" >管理</a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank">自己</a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank">的東c</a>
+                            <a href="space_list.php">編輯</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#ui-elements" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">其他管理</span>
-                        <i class="link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu" id="ui-elements">
-                        <li>
-                            <a href="#">自己</a>
-                        </li>
-                        <li>
-                            <a href="#">key</a>
-                        </li>
-                        <li>
-                            <a href="#">自己要的</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="link-title">KEY</span>
-                        <i class="link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="link-title">WHATUWANT</span>
-                        <i class="link-icon"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="link-title">GOGO</span>
-                        <i class="link-icon"></i>
-                    </a>
-                </li>
-                <li class="nav-category-divider">SWITCH MEMBERS</li>
+                <li class="nav-category-divider" style="margin-top:0">SUB</li>
                 <li>
                     <a href="#">
                         <span class="link-title">空間</span>
-                        <i class="link-icon"></i>
+                        <i class="link-icon fas fa-map-marked-alt"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="link-title">課程</span>
-                        <i class="link-icon"></i>
+                        <!-- <i class=" fa-chalkboard-teacher"></i> -->
+                        <i class="link-icon fas fa-chalkboard-teacher"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="link-title">老師</span>
-                        <i class="link-icon"></i>
+                        <i class="link-icon fas fa-user-edit"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="link-title">器具</span>
-                        <i class="link-icon"></i>
+                        <i class="link-icon fas fa-tools"></i>
                     </a>
                 </li>
                 <li>
                     <a href="#">
                         <span class="link-title">食材</span>
-                        <i class="link-icon"></i>
+                        <i class="link-icon fas fa-utensils"></i>
+
                     </a>
                 </li>
             </ul>
 
         </div>
         <div class="page-content-wrapper">
-            <div class="container-fluid">   
+            <div class="page-content-wrapper-inner">

@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list`";
@@ -25,40 +25,197 @@ $stmt = $pdo->query($sql);
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 <?php include __DIR__ . '/space__side.php'; ?>
+<style>
+    .displayFlex {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 10px;
+        position: relative;
+    }
+
+    .card-margin {
+        margin: 5px;
+    }
+
+    .marginAuto {
+        text-align: center;
+    }
+
+    .fontsize {
+        font-size: 8px;
+        color: sandybrown;
+    }
+
+    .fontsize1 {
+        font-size: 12px;
+        color: #CF8D3C;
+    }
+
+    .textcenter {
+        text-align: center;
+    }
+
+    .cardshadows {
+        box-shadow: 0px 0px 80px #000000;
+        transition: 0.5s
+    }
+
+    .cardshadows:hover {
+        transform: scale(1.1);
+        z-index: 1;
+    }
+
+    .textshadows {
+        text-shadow: 0px 0px 5px #461922;
+
+    }
+
+    .positionbottom {
+        position: absolute;
+        bottom: 0;
+        left: 25%;
+
+    }
+</style>
 <div>
-    <nav aria-label="Page navigation example">
-        <nav class="navbar navbar-expand-lg">
-            <h3>空間管理介面</h3>
-            <div class="container">
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar navbar-expand-lg">
+        <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarSupportedContent">
+            <nav>
+                <ul class="navbar-nav">
+                    <li class="nav-item <?= $page_name == '' ? 'active' : '' ?> ">
+                    <button  type="submit" form="my-form" class="btn btn-outline-warning" style="width:100px;" onclick="return confirm('確定刪除嗎？')">批量刪除</button>
+                    </li>
+                </ul>
+            </nav>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item <?= $page_name == 'space_list' ? 'active' : '' ?> ">
+                    <a class="nav-link" href="space_list.php">全部商品</a>
+                </li>
 
-                    <ul class="navbar-nav mr-auto">
+                <li class="nav-item <?= $page_name == 'space_list_up' ? 'active' : '' ?> ">
+                    <a class="nav-link" href="space_list_up.php">上架中</a>
+                </li>
 
-                        <li class="nav-item <?= $page_name == 'appliance_list_page' ? 'active' : '' ?> ">
-                            <a class="nav-link" href="space_list.php">全部商品</a>
-                        </li>
+                <li class="nav-item <?= $page_name == 'space_list_noup' ? 'active' : '' ?> ">
+                    <a class="nav-link" href="space_list_noup.php">下架中</a>
+                </li>
+            </ul>
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search">
+                <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+</div>
 
-                        <li class="nav-item <?= $page_name == 'data_list_fetchAll' ? 'active' : '' ?> ">
-                            <a class="nav-link" href=".php">上架中</a>
-                        </li>
+<form action="space_deleteALL.php" method="post" id="my-form">
+<div class="row">
+    <div class="col d-flex flex-wrap     justify-content-center ">
+        <?php while ($r = $stmt->fetch()) : ?>
+            <?php $v = json_decode($r['space_image_path']);
+                $i = 0;
+                ?>
+            <div class="card m-5  cardshadows" style="width: 28rem; background:#1B1B27;">
+                <label class="fontsize"　for="space_sid">批量刪除勾選</label>
+                <input style="width:50px"   type="checkbox" name="space_sid[]" id="space_sid" value="<?=$r['space_sid']?>">
+            
+                <div class="card-body">
+                    <div style="height:250px; overflow:hidden;">
+                        <h3 style="color:#C2301F;">LOGO</h3>
+                        <div style="position: relative;">
+                            <img id="logoImg" src="space_uploads/<?= htmlentities($r['space_logo_path']); ?>" class="d-block w-100" alt="..." max-height="800px">
+                        </div>
+                    </div>
+                    <h3 style="color:#C2301F;">環境圖片</h3>
 
-                        <li class="nav-item <?= $page_name == 'data_list_page' ? 'active' : '' ?> ">
-                            <a class="nav-link" href="data_list_page.php">下架中</a>
-                        </li>
-                        <li class="nav-item <?= $page_name == 'data_list_page' ? 'active' : '' ?> ">
-                            <a class="nav-link" href="data_list_page.php"></a>
-                        </li>
-                    </ul>
+                    <div class="m-3" style="height:200px; overflow:hidden;">
+                        <img src="space_uploads/<?= $v[0] ?>" class="d-block w-100" max-height="800px">
+                    </div>
+
+
+                    <div>
+                        <h5 class="card-title fontsize " style="color:#C2301F;">空間名稱</h5>
+                        <p class="card-text fontsize"><?= htmlentities($r['space_name']); ?></p>
+                        <p class="fontsize">當日價格：<?= htmlentities($r['space_price']) ?>$</p>
+                    </div>
+                    <li class="fontsize">標題 : <?= htmlentities($r['space_title_description']) ?></li>
+                    <li class="fontsize"> <span class="fontsize">提供日期 : </span><?= htmlentities($r['space_time']) ?></li>
+                    <li class="fontsize">最大人數 : <?= htmlentities($r['space_max_people']) ?></li>
+                </div>
+                <ul class="list-group list-group-flush" style="padding:10px;">
+                    <div class="d-flex justify-content-around">
+                        <div class="fontsize text-center">
+                            <div>電話</div>
+                            <div> <?= htmlentities($r['space_tel']) ?></div>
+                        </div>
+                        <div class="fontsize text-center">
+                            <div>地區</div>
+                            <div class="fontsize"> <?= htmlentities($r['taiwan_city']) ?></div>
+                        </div>
+                    </div>
+
+                    <?php
+                        $space_service = json_decode($r['space_service']); ?>
+                    <div class="fontsize text-center">
+                        <div>環境風格</div>
+                        <div class=" text-truncate fontsize text-center" id="space_service"> <?php foreach ($space_service  as $a) {
+                                                                                                        switch ($a) {
+                                                                                                            case 1:
+                                                                                                                $a = '溫馨 ';
+                                                                                                                break;
+                                                                                                            case 2:
+                                                                                                                $a = '高雅 ';
+                                                                                                                break;
+                                                                                                            case 3:
+                                                                                                                $a = '古典 ';
+                                                                                                                break;
+                                                                                                            case 4:
+                                                                                                                $a = '時尚 ';
+                                                                                                                break;
+                                                                                                        }
+                                                                                                        echo $a;
+                                                                                                    }  ?></div>
+                        <div class="d-flex justify-content-around">
+                        </div>
+                    </div>
+                    <div class="d-flex  justify-content-around">
+                        <div class="fontsize text-center">
+                            <div>上架狀態</div>
+                            <div> <?php $status = $r['space_status'];
+                                        echo $status == 1 ? "上架中" : "下架中"; ?></div>
+                        </div>
+                        <div class="fontsize text-center">
+                            <div class="fontsize">更新時間 </div>
+                            <div class="fontsize"><?= htmlentities($r['space_creat_time']) ?></div>
+                        </div>
+                    </div>
+
+                    <p class="fontsize text-truncate" id="space_description" style="padding:10px;">詳細介紹 : <?= htmlentities($r['space_description']) ?></p>
+
+                </ul>
+                <div class="card-body d-flex justify-content-around ">
+                    <a class="btn btn-warning fontsize1" href="javascript:delete_one(<?= $r['space_sid'] ?>)">
+                        刪除 <i class="fas fa-trash-alt fontsize1"></i>
+                    </a>
+                    <a class="btn btn-warning fontsize1" href="space_edit.php?space_sid=<?= $r['space_sid'] ?>">
+                        編輯 <i class="fas fa-edit fontsize1"></i>
+                    </a>
                 </div>
             </div>
-        </nav>
-        <ul class="pagination  mt-3">
+            <?php $i++; ?>
+        <?php endwhile; ?>
+    </div>
+</div>
+</form>
+<div class="row">
+    <div class="col">
+        <ul class="pagination  mt-3 justify-content-center">
             <li class="page-item">
                 <a class="page-link" href="<?= "?page=" . ($page - 1) ?>" aria-label="Previous">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-
             <?php
             if ($totalPages < 5) {
                 $p_start = 1;
@@ -84,103 +241,15 @@ $stmt = $pdo->query($sql);
                 </a>
             </li>
         </ul>
-    </nav>
-</div>
-
-<div class="row">
-    <div class="col d-flex flex-wrap     justify-content-center">
-        <?php while ($r = $stmt->fetch()) : ?>
-            <?php $v = json_decode($r['space_image_path']);
-                $i = 0;
-                ?>
-            <div class="card m-5" style="width: 20rem;">
-                <div class="card-body">
-                    <?php foreach ($v as $a) : ?>   
-                    <div class="m-3">
-                        <img src="php/uploads/<?= $a ?>" class="d-block w-100" alt="..." max-height="800px">
-                    </div>
-                    <?php endforeach; ?>
-                    <h5 class="card-title">空間名稱</h5>
-                    <p class="card-text"><?= htmlentities($r['space_name']); ?></p>
-                    <li class="list-group-item">提供時間 :<?= htmlentities($r['space_time']) ?></li>
-                    <li class="list-group-item">人數 : <?= htmlentities($r['space_max_people']) ?></li>
-                </div>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">電話 : <?= htmlentities($r['space_tel']) ?></li>
-                    <li class="list-group-item">地區 : <?= htmlentities($r['taiwan_city']) ?></li>
-                    <li class="list-group-item">環境描述 : <?= htmlentities($r['space_description']) ?></li>
-                    <li class="list-group-item">上架狀態 : <?php $status = $r['space_status'];
-                                                            echo $status == 1 ? "上架中" : "下架中"; ?></li>
-                </ul>
-                <div class="card-body d-flex justify-content-around">
-
-                    <a href="javascript:delete_one(<?= $r['space_sid'] ?>)">
-                        刪除 <i class="fas fa-trash-alt"></i>
-                    </a>
-                    <a href="space_edit.php?space_sid=<?= $r['space_sid'] ?>">
-                        編輯 <i class="fas fa-edit"></i>
-                    </a>
-                </div>
-            </div>
-            <?php $i++; ?>
-        <?php endwhile; ?>
     </div>
 </div>
+
 <script>
+
     function delete_one(sid) {
         if (confirm(`要刪除第${sid}筆資料嗎？`)) {
-            location.href = 'php/space_delete.php?space_sid=' + sid;
+            location.href = 'space_delete.php?space_sid=' + sid;
         }
     }
 </script>
 <?php include __DIR__ . '/space__footer.php'; ?>
-<div style="margin-top: 2rem;">
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th scope="col"><i class="fas fa-trash-alt"></i></th>
-                <th scope="col">#</th>
-                <th scope="col">空間名稱</th>
-                <th scope="col">LOGO路徑</th>
-                <th scope="col">環境介紹</th>
-                <th scope="col">圖片路徑</th>
-                <th scope="col">提供時間</th>
-                <th scope="col">人數</th>
-                <th scope="col">電話</th>
-                <th scope="col">地區</th>
-                <th scope="col">地址</th>
-                <!-- <th scope="col">上架狀態</th> -->
-                <th scope="col"><i class="fas fa-edit"></i></th>
-            </tr>
-        </thead>
-        <tbody>
-
-            <?php while ($r = $stmt->fetch()) : ?>
-                <tr>
-                    <td>
-                        <a href="javascript:delete_one(<?= $r['space_sid'] ?>)">
-                            <i class="fas fa-trash-alt"></i>
-                        </a>
-                    </td>
-                    <td><?= htmlentities($r['space_sid']) ?></td>
-                    <td><?= htmlentities($r['space_name']) ?></td>
-                    <td><?= htmlentities($r['space_logo_path']) ?></td>
-                    <td><?= htmlentities($r['space_description']) ?></td>
-                    <td><?= htmlentities($r['space_image_path']) ?></td>
-                    <td><?= htmlentities($r['space_time']) ?></td>
-                    <td><?= htmlentities($r['space_max_people']) ?></td>
-                    <td><?= htmlentities($r['space_tel']) ?></td>
-                    <td><?= htmlentities($r['space_area']) ?></td>
-                    <td><?= htmlentities($r['space_address']) ?></td>
-                    <td><?php $status = $r['space_status'];
-                            echo $status == 1 ? "上架中" : "下架中"; ?></td>
-                    <td>
-                        <a href="space_edit.php?space_sid=<?= $r['space_sid'] ?>">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                    </td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-</div>

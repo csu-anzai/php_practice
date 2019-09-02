@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'data_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list` ";

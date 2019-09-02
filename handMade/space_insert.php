@@ -1,79 +1,66 @@
 <?php
-require_once __DIR__ . '/php/space__connect_db.php';
+require_once __DIR__ . '/space__connect_db.php';
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 <?php include __DIR__ . '/space__side.php'; ?>
 
-<div class="row">
-    <div class="col">
-        <div class="alert alert-primary" role="alert" id="info-bar" style="display: none"></div>
-    </div>
-</div>
-<h5>新增資料</h5>
-<form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="form-group">
-                        <label for="space_name">空間名稱</label>
-                        <input type="text" class="form-control" id="space_name" name="space_name" placeholder="Password" value="aaa">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="logo_path">LOGO上傳</label>
-                        <img id="output" height="200" style="display:none">
-                        <input type="file" class="form-control" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email"  onchange="openFile(event)">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="space_description">環境介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="Enter mobile" value="aa">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="image_path">圖片上傳</label>
-                        <input type="file" class="form-control" id="image_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" multiple >
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="space_time">提供時間</label>
-                        <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="Enter address" value="2019-03-02">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="max_people">人數</label>
-                        <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="Enter address" value="50">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <div class="form-group">
-                        <label for="tel">電話</label>
-                        <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="Enter address" value="0976562513">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                </div>
+<style>
+    #preview img {
+        margin: 10px;
+        width: 150px;
+    }
+</style>
+<nav class="navbar navbar-expand-lg">
+    <h3 style="color:#FFC107; padding: 0 50px 0 0;">新增商品頁面</h3>
+    <ul class="navbar-nav">
+        <li class="nav-item <?= $page_name == 'space_inert_page' ? 'active' : '' ?> ">
+            <a class="nav-link" href="space_list.php"><button type="button" class="btn btn-outline-warning" style="width:200px;">返回商品列表</button></a>
+        </li>
+    </ul>
+</nav>
+<div class="container">
+    <form onsubmit="return checkForm()" name="form1" enctype="multipart/form-data" style="margin:15% 0 0 0;">
+        <div class="row">
+            <div class="col">
+                <div class="alert alert-success" role="alert" id="info-bar" style="display: none"></div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="card">
+        <div>
+            <div class="card  text-white bg-dark flex-wrap  " style="box-shadow: 0px 0px 80px #000000;">
                 <div class="card-body">
-                    <!-- <div class="form-group">
-                                <label for="area">地區</label>
-                                <input type="text" class="form-control" id="area" name="space_area" aria-describedby="emailHelp" placeholder="Enter address" value="aa">
-                                <small id="emailHelp" class="form-text"></small>
-                            </div> -->
-                    <?php
-                    $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
-                    $stmt = $pdo->query($sql); ?>
-                    <select class="custom-select" name="space_area">
-                        <option selected value="">地區</option>
-                        <?php while ($r = $stmt->fetch()) : ?>
-                            <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
-                        <?php endwhile; ?>
-
-                    </select>
+                    <div class="d-flex  flex-wrap" id="preview"></div>
+                    <div class="form-group d-flex">
+                        <label class="btn btn-outline-warning" for="images_path">選擇上傳的圖檔</label>
+                        <input type="file" class="form-control" style="display:none;" id="images_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
+                        <small id="emailHelp" class="form-text"></small>
+                    </div>
                     <div class="form-group">
-                        <label for="service">環境氣氛</label>
+                        <label class="btn btn-outline-warning" for="logo_path">LOGO上傳</label>
+                        <img id='logo_img' src="" height="200">
+                        <input type="file" class="form-control" style="display:none;" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text"></small>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group d-flex align-items-baseline" style="width:50%">
+                            <label for="space_name" style="width:115px;">空間名稱</label>
+                            <input type="text" class="form-control" id="space_name" name="space_name" placeholder="請輸入名稱" >
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group d-flex align-items-baseline" style="width:48% ">
+                            <label for="title_description" style="width:120px;">標題內容</label>
+                            <input type="text" class="form-control" id="title_description" name="space_title_description" aria-describedby="emailHelp" placeholder="請輸入標題">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group d-flex align-items-baseline">
+                        <label for="space_description" style='width:100px;'>詳細介紹</label>
+                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="請輸入詳細介紹" >
+                        <small id="emailHelp" class="form-text"></small>
+                    </div>
+                    <div class="form-group">
+                        <label for="service" style='width:100px;'>環境氣氛</label>
                         <!-- <input type="text" class="form-control" id="service" name="space_service" aria-describedby="emailHelp" placeholder="Enter address" value="aa">
                                 <small id="emailHelp" class="form-text"></small> -->
                         <?php
@@ -94,53 +81,88 @@ require_once __DIR__ . '/php/space__connect_db.php';
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <div class="form-group">
-                        <label for="address">地址</label>
-                        <input type="text" class="form-control" id="address" name="space_address" aria-describedby="emailHelp" placeholder="Enter address" value="aa">
-                        <small id="emailHelp" class="form-text"></small>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group d-flex align-items-baseline" style="width:30%;">
+                            <label for="space_time" style='width:130px;'>提供時間</label>
+                            <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="請選擇" >
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group d-flex align-items-baseline" style="width:30%;">
+                            <label for="max_people" style='width:130px;'>最大人數</label>
+                            <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="請輸入人數" >
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group d-flex align-items-baseline" style="width:30%;">
+                            <label for="tel" style='width:70px;'>電話</label>
+                            <input type="tel" class="form-control" id="tel" name="space_tel" aria-describedby="emailHelp" placeholder="請輸入電話">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="status">直接上架</label>
-                        <!-- <input type="text" class="form-control" id="status" name="space_status" aria-describedby="emailHelp" placeholder="Enter address" value="1"> -->
-                        <select class="custom-select" name="space_status">
-                            <option value="0">上架</option>
-                            <option value="1">下架</option>
-                        </select>
-                        <small id="emailHelp" class="form-text"></small>
+
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group d-flex align-items-baseline" style="width:30%;">
+                            <label for="address" style='width:130px;'>地區</label>
+                            <?php $sql  = sprintf("SELECT * FROM `taiwan_area_number` WHERE 1");
+                            $stmt = $pdo->query($sql); ?>
+                            <select class="custom-select" name="space_area">
+                                <?php while ($r = $stmt->fetch()) : ?>
+                                    <option value="<?= $r['area_sid'] ?>"><?= $r['taiwan_city'] ?></option>
+                                <?php endwhile; ?>
+                            </select>
+                        </div>
+                        <div class="form-group d-flex align-items-baseline" style="width:65%;">
+                            <label for="address" style='width:100px;'>地址</label>
+                            <input type="text" class="form-control" id="address" name="space_address" aria-describedby="emailHelp" placeholder="請輸入地址">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="price">價格</label>
-                        <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="Enter address" value="500">
-                        <small id="emailHelp" class="form-text"></small>
+
+
+                    <div class="d-flex justify-content-between">
+                        <div class="form-group d-flex align-items-baseline" style="width:30%;">
+                            <label for="status" style='width:130px;'>直接上架</label>
+                            <!-- <input type="text" class="form-control" id="status" name="space_status" aria-describedby="emailHelp" placeholder="Enter address" value="1"> -->
+                            <select class="custom-select" name="space_status">
+                                <option value="1">上架</option>
+                                <option value="0">下架</option>
+                            </select>
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
+                        <div class="form-group d-flex align-items-baseline" style="width:65%;">
+                            <label for="price" style='width:100px;'>價格</label>
+                            <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="請輸入價格">
+                            <small id="emailHelp" class="form-text"></small>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="title_description">詳細內容</label>
-                        <input type="text" class="form-control" id="title_description" name="space_title_description" aria-describedby="emailHelp" placeholder="Enter address">
-                        <small id="emailHelp" class="form-text"></small>
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-5 w-100">Submit</button>
+                    <button type="submit" class="btn btn-outline-warning  w-100">新增</button>
+
                 </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>
 <script>
     let info_bar = document.querySelector('#info-bar');
     let space_name = document.querySelector('#space_name');
     // let i, s, item;
 
+
+
+
+    // 
     function checkForm() {
 
-        if (space_name.value.length < 2) {
+        if (space_name.value.length < 1) {
+            alert('欄位不正確');
             space_name.style.border = '1px solid red';
-            space_name.closest('.form-group').querySelector('small').innerText = '請填寫正確姓名';
-
+            // space_name.closest('.form-group').querySelector('small').innerText = '錯誤';
         }
 
 
         let fd = new FormData(document.form1); //要傳的資料
 
-        fetch('php/space_insert_api.php', {
+        fetch('space_insert_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
             })
@@ -162,19 +184,36 @@ require_once __DIR__ . '/php/space__connect_db.php';
     }
 
 
-    //縮圖
-    function openFile(event){
-     var input = event.target; //取得上傳檔案
-    var reader = new FileReader(); //建立FileReader物件
 
-    reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+    //多圖
+    function previewFiles() {
 
-    reader.onload = function(){ //FileReader取得上傳檔案後執行以下內容
-    var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
-    $('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
-  };
-}
-</script>
-<script>
+        var preview = document.querySelector('#preview');
+        var files = document.querySelector('input[type=file]').files;
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                var reader = new FileReader();
+
+                reader.addEventListener("load", function() {
+                    var image = new Image();
+                    image.height = 100;
+                    image.title = file.name;
+                    image.src = this.result;
+                    preview.appendChild(image);
+                }, false);
+
+                reader.readAsDataURL(file);
+            }
+
+        }
+
+        if (files) {
+            [].forEach.call(files, readAndPreview);
+        }
+
+    }
 </script>
 <?php include __DIR__ . '/space__footer.php'; ?>
