@@ -7,7 +7,9 @@ require_once __DIR__ . '/space__connect_db.php';
 <style>
     #preview img {
         margin: 10px;
-        width: 150px;
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
     }
 </style>
 <nav class="navbar navbar-expand-lg">
@@ -36,8 +38,8 @@ require_once __DIR__ . '/space__connect_db.php';
                     </div>
                     <div class="form-group">
                         <label class="btn btn-outline-warning" for="logo_path">LOGO上傳</label>
-                        <img id='logo_img' src="" height="200">
-                        <input type="file" class="form-control" style="display:none;" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
+                        <img id="logo_img" src="" height="200" alt="Image preview...">
+                        <input type="file" class="form-control" style="display:none;" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" onchange="previewFile()">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="d-flex justify-content-between">
@@ -176,7 +178,7 @@ require_once __DIR__ . '/space__connect_db.php';
             });
         return false;
     }
-    
+
     //多圖
     function previewFiles() {
         var preview = document.querySelector('#preview');
@@ -198,6 +200,20 @@ require_once __DIR__ . '/space__connect_db.php';
         }
         if (files) {
             [].forEach.call(files, readAndPreview);
+        }
+    }
+    //單圖
+    function previewFile() {
+        var preview = document.querySelector('#logo_img');
+        var file = document.querySelector('#logo_path').files[0];
+        var reader = new FileReader();
+
+        reader.addEventListener("load", function() {
+            preview.src = reader.result;
+        }, false);
+
+        if (file) {
+            reader.readAsDataURL(file);
         }
     }
 </script>
