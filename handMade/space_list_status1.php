@@ -3,7 +3,7 @@
 require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$t_sql = "SELECT COUNT(1) FROM `space_list`";
+$t_sql = "SELECT COUNT(1) FROM `space_list` WHERE  `space_list`.`space_status`=1";
 $t_stmt = $pdo->query($t_sql);
 $totalRows = $t_stmt->fetch(PDO::FETCH_NUM)[0];
 $per_page = 4;
