@@ -43,7 +43,7 @@ require_once __DIR__ . '/space__connect_db.php';
                     <div class="d-flex justify-content-between">
                         <div class="form-group d-flex align-items-baseline" style="width:50%">
                             <label for="space_name" style="width:115px;">空間名稱</label>
-                            <input type="text" class="form-control" id="space_name" name="space_name" placeholder="請輸入名稱" >
+                            <input type="text" class="form-control" id="space_name" name="space_name" placeholder="請輸入名稱">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group d-flex align-items-baseline" style="width:48% ">
@@ -56,7 +56,7 @@ require_once __DIR__ . '/space__connect_db.php';
 
                     <div class="form-group d-flex align-items-baseline">
                         <label for="space_description" style='width:100px;'>詳細介紹</label>
-                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="請輸入詳細介紹" >
+                        <input type="text" class="form-control" id="space_description" name="space_description" aria-describedby="emailHelp" placeholder="請輸入詳細介紹">
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group">
@@ -85,12 +85,12 @@ require_once __DIR__ . '/space__connect_db.php';
                     <div class="d-flex justify-content-between">
                         <div class="form-group d-flex align-items-baseline" style="width:30%;">
                             <label for="space_time" style='width:130px;'>提供時間</label>
-                            <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="請選擇" >
+                            <input type="date" class="form-control" id="space_time" name="space_time" aria-describedby="emailHelp" placeholder="請選擇">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group d-flex align-items-baseline" style="width:30%;">
                             <label for="max_people" style='width:130px;'>最大人數</label>
-                            <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="請輸入人數" >
+                            <input type="number" class="form-control" id="max_people" name="space_max_people" aria-describedby="emailHelp" placeholder="請輸入人數">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group d-flex align-items-baseline" style="width:30%;">
@@ -146,22 +146,14 @@ require_once __DIR__ . '/space__connect_db.php';
     let info_bar = document.querySelector('#info-bar');
     let space_name = document.querySelector('#space_name');
     // let i, s, item;
-
-
-
-
     // 
     function checkForm() {
-
         if (space_name.value.length < 1) {
             alert('欄位不正確');
             space_name.style.border = '1px solid red';
             // space_name.closest('.form-group').querySelector('small').innerText = '錯誤';
         }
-
-
         let fd = new FormData(document.form1); //要傳的資料
-
         fetch('space_insert_api.php', {
                 method: 'POST',
                 body: fd, //要傳的資料
@@ -173,30 +165,27 @@ require_once __DIR__ . '/space__connect_db.php';
                 console.log(json);
                 info_bar.style.display = 'block';
                 info_bar.innerHTML = json.info;
-                if (json.success) {
+                if (json.success) { //這裡的success是後端result json再轉換成物件
                     info_bar.className = 'alert alert-success';
+                    setTimeout(function() {
+                        location.href = '/php_practice/handMade/space_list.php';
+                    }, 1000);
                 } else {
                     info_bar.className = 'alert alert-danger';
                 }
             });
-
         return false;
     }
-
-
-
+    
     //多圖
     function previewFiles() {
-
         var preview = document.querySelector('#preview');
         var files = document.querySelector('input[type=file]').files;
 
         function readAndPreview(file) {
-
             // Make sure `file.name` matches our extensions criteria
             if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
                 var reader = new FileReader();
-
                 reader.addEventListener("load", function() {
                     var image = new Image();
                     image.height = 100;
@@ -204,16 +193,12 @@ require_once __DIR__ . '/space__connect_db.php';
                     image.src = this.result;
                     preview.appendChild(image);
                 }, false);
-
                 reader.readAsDataURL(file);
             }
-
         }
-
         if (files) {
             [].forEach.call(files, readAndPreview);
         }
-
     }
 </script>
 <?php include __DIR__ . '/space__footer.php'; ?>

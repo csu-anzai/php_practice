@@ -39,16 +39,17 @@ $row2 = $pdo->query($sql2)->fetch();
         </div>
         <div class="card  text-white bg-dark flex-wrap  " style="box-shadow: 0px 0px 80px #000000;">
             <div class="card-body">
-                <div class="d-flex  flex-wrap" id="preview"></div>
+                <div class="d-flex  flex-wrap" id="preview">
+                </div>
                 <div class="form-group">
                     <label class="btn btn-outline-warning" for="images_path">選擇上傳的圖檔</label>
-                    <input type="file" class="form-control" style="display:none;" id="images_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple value="<?= $row2['space_image_path'] ?>">
+                    <input type="file" class="form-control" style="display:none;" id="images_path" name="space_image_path[]" aria-describedby="emailHelp" placeholder="Enter birthday" onchange="previewFiles()" multiple>
                     <small id="emailHelp" class="form-text"></small>
                 </div>
                 <div class="form-group">
                     <label class="btn btn-outline-warning" for="logo_path">LOGO上傳</label>
                     <img id='logo_img' src="" height="200">
-                    <input type="file" class="form-control" style="display:none;" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email" value="<?= $row2['space_logo_path'] ?>">
+                    <input type="file" class="form-control" style="display:none;" id="logo_path" name="space_logo_path" aria-describedby="emailHelp" placeholder="Enter email">
                     <small id="emailHelp" class="form-text"></small>
                 </div>
                 <div class="d-flex justify-content-between">
@@ -195,13 +196,15 @@ $row2 = $pdo->query($sql2)->fetch();
                 console.log(json);
                 info_bar.style.display = 'block';
                 info_bar.innerHTML = json.info;
-                if (json.success) {
+                if (json.success) { //這裡的success是後端result json再轉換成物件
                     info_bar.className = 'alert alert-success';
+                    setTimeout(function() {
+                        location.href = '/php_practice/handMade/space_list.php';
+                    }, 1000);
                 } else {
                     info_bar.className = 'alert alert-danger';
                 }
             });
-
         return false;
     }
 

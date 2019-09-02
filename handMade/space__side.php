@@ -40,10 +40,13 @@
                     </a>
                     <ul class="collapse navigation-submenu" id="sample-pages">
                         <li>
-                            <a href="space_insert.php">上架</a>
+                            <a href="space_list.php">全部商品</a>
                         </li>
                         <li>
-                            <a href="space_list.php">編輯</a>
+                            <a href="space_list_status0.php">上架中</a>
+                        </li>
+                        <li>
+                            <a href="space_list_status1.php">下架中</a>
                         </li>
                     </ul>
                 </li>
