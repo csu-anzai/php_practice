@@ -22,6 +22,25 @@ $sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
+// $search_result = $_SESSION['search'];
+// $sql_search = sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+// $stmt_search = $pdo->query($sql_search);
+// $row_search = $stmt_search->fetch();
+
+// if (!empty($_GET['inputPassword2'])) {
+//     $search = $_GET['inputPassword2'];
+//     $tst = $pdo->query("SELECT COUNT(*) FROM `ingredient` WHERE `ingredient`.`sid`= $search");
+
+//     if ($tst->rowCount() > 0) {
+//         $_SESSION['search'] = $search;
+//         header('Location: space_search.php');
+//     } else {
+//         exit;
+//     }
+// }
+
+
+
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 
@@ -114,7 +133,7 @@ $stmt = $pdo->query($sql);
                 <div class="col">
                     <ul class="pagination  mt-3 justify-content-center">
                         <li class="page-item">
-                            <a class="page-link" style="color: #15141A;"  href="<?= "?page=" . ($page - 1) ?> aria-label="Previous">
+                            <a class="page-link" style="color: #15141A;" href="<?= "?page=" . ($page - 1) ?>" aria-label="Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -134,19 +153,19 @@ $stmt = $pdo->query($sql);
                         }
                         for ($i = $p_start; $i <= $p_end; $i++) :
                             ?>
-                            <li class="page-item   <?= $i == $page ? 'active' : '' ?>"><a class="page-link "  style="color: #15141A;" href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
+                            <li class="page-item   <?= $i == $page ? 'active' : '' ?>"><a class="page-link " style="color: #15141A;" href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
                         <?php endfor; ?>
 
                         <li class="page-item">
-                            <a class="page-link"  style="color: #15141A;"  href="<?= "?page=" . ($page + 1) ?>" aria-label="Next">
+                            <a class="page-link" style="color: #15141A;" href="<?= "?page=" . ($page + 1) ?>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search">
+            <form class="form-inline" action="ingredient_space.php" method="get" name="form_search">
+                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search" name="search_sid">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -181,7 +200,7 @@ $stmt = $pdo->query($sql);
                                 <div class="card-header" id="headingOne" style="padding:0px;text-align: center;">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link" style="color:#ccc;" type="button" data-toggle="collapse" data-target="#collapse<?= $r['space_sid'] ?>" aria-expanded="false" aria-controls="collapse<?= $r['space_sid'] ?>">
-                                        <?= htmlentities($r['space_name']); ?>
+                                            <?= htmlentities($r['space_name']); ?>
                                         </button>
                                     </h2>
                                 </div>
@@ -304,4 +323,5 @@ $stmt = $pdo->query($sql);
         form_submit.submit();
     })
 </script>
+
 <?php include __DIR__ . '/space__footer.php'; ?>
