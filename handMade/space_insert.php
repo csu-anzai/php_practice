@@ -1,3 +1,4 @@
+    
 <?php
 require_once __DIR__ . '/space__connect_db.php';
 ?>
@@ -132,7 +133,7 @@ require_once __DIR__ . '/space__connect_db.php';
                             <small id="emailHelp" class="form-text"></small>
                         </div>
                         <div class="form-group d-flex align-items-baseline" style="width:65%;">
-                            <label for="price" style='width:100px;'>價格</label>
+                            <label for="price" style='width:100px;'>包場價格</label>
                             <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="請輸入價格">
                             <small id="emailHelp" class="form-text"></small>
                         </div>
@@ -178,12 +179,10 @@ require_once __DIR__ . '/space__connect_db.php';
             });
         return false;
     }
-
     //多圖
     function previewFiles() {
         var preview = document.querySelector('#preview');
         var files = document.querySelector('input[type=file]').files;
-
         function readAndPreview(file) {
             // Make sure `file.name` matches our extensions criteria
             if (/\.(jpe?g|png|gif)$/i.test(file.name)) {
@@ -207,11 +206,9 @@ require_once __DIR__ . '/space__connect_db.php';
         var preview = document.querySelector('#logo_img');
         var file = document.querySelector('#logo_path').files[0];
         var reader = new FileReader();
-
         reader.addEventListener("load", function() {
             preview.src = reader.result;
         }, false);
-
         if (file) {
             reader.readAsDataURL(file);
         }

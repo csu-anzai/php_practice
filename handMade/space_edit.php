@@ -161,7 +161,7 @@ $row2 = $pdo->query($sql2)->fetch();
                         <small id="emailHelp" class="form-text"></small>
                     </div>
                     <div class="form-group d-flex align-items-baseline" style="width:65%;">
-                        <span for="price" style='width:100px;'>價格</span>
+                        <span for="price" style='width:100px;'>包場價格</span>
                         <input type="text" class="form-control" id="price" name="space_price" aria-describedby="emailHelp" placeholder="Enter address" value="<?= $row['space_price'] ?>">
                         <small id="emailHelp" class="form-text"></small>
                     </div>

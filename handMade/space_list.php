@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -22,22 +22,19 @@ $sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
-// $search_result = $_SESSION['search'];
-// $sql_search = sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
-// $stmt_search = $pdo->query($sql_search);
-// $row_search = $stmt_search->fetch();
 
-// if (!empty($_GET['inputPassword2'])) {
-//     $search = $_GET['inputPassword2'];
-//     $tst = $pdo->query("SELECT COUNT(*) FROM `ingredient` WHERE `ingredient`.`sid`= $search");
+if (!empty($_GET['search_sid'])) {
+    $search = $_GET['search_sid'];
+    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`sid`= $search");
 
-//     if ($tst->rowCount() > 0) {
-//         $_SESSION['search'] = $search;
-//         header('Location: space_search.php');
-//     } else {
-//         exit;
-//     }
-// }
+    if ($tst->rowCount() > 0) {
+        $_SESSION['search'] = $search;
+        header('Location: space_search.php');
+    } else {
+        exit;
+    }
+}
+
 
 
 
@@ -164,8 +161,8 @@ $stmt = $pdo->query($sql);
                     </ul>
                 </div>
             </div>
-            <form class="form-inline" action="ingredient_space.php" method="get" name="form_search">
-                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search" name="search_sid">
+            <form class="form-inline" action="space_search.php" method="get" name="form_search">
+                <input class="form-control mr-sm-2" id="search_sid" type="search" placeholder="請輸入商品編號" aria-label="Search" name="search_sid">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -267,6 +264,11 @@ $stmt = $pdo->query($sql);
                                             <div class="col-lg-6 ">
                                                 <span class="marginAuto" style="color:#fff;font-size:12px;">更新時間</span>
                                                 <p class="card-text  fontsize"> <?= htmlentities($r['space_creat_time']) ?></p>
+
+                                            </div>
+                                            <div class="col-lg-6 ">
+                                                <span class="marginAuto" style="color:#fff;font-size:12px;">包場價格</span>
+                                                <p class="card-text  fontsize"> <?= htmlentities($r['space_price']) ?></p>
 
                                             </div>
                                         </div>
