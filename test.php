@@ -28,6 +28,10 @@
         $P->setName  ("jack");
         echo $P->getName();
         ?>
+
+
+
+
 </body>
 
 </html>

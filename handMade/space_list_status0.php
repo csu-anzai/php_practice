@@ -1,7 +1,6 @@
 <?php
-
 require_once __DIR__ . '/space__connect_db.php';
-$page_name = 'space_list';
+$page_name = 'space_list0';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list` WHERE  `space_list`.`space_status`=0";
 $t_stmt = $pdo->query($t_sql);
@@ -22,6 +21,19 @@ $sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number`  ON `spac
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
+
+if (!empty($_GET['search_sid'])) {
+    $search = $_GET['search_sid'];
+    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`space_sid`= $search");
+
+    if ($tst->rowCount() > 0) {
+        $_SESSION['search'] = $search;
+        header('Location: space_search.php');
+    } else {
+        exit;
+    }
+}
+
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 
@@ -145,8 +157,8 @@ $stmt = $pdo->query($sql);
                     </ul>
                 </div>
             </div>
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search">
+            <form class="form-inline" action="space_search.php" method="get" name="form_search">
+                <input class="form-control mr-sm-2" id="search_sid" type="search" placeholder="請輸入商品編號" aria-label="Search" name="search_sid">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>

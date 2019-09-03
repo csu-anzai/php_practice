@@ -1,22 +1,22 @@
 <?php
-session_start();
+// session_start();
 require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 // $sql = ""
 // $rows = $stmt->fetch();
 // print_r($rows);
-
 $search_result = $_SESSION['search'];
-$sql = "SELECT * FROM `space_list` WHERE `space_list`.`sid`= $search_result";
-$stmt = $pdo->query($sql);
-$row = $stmt->fetch();
 
+$sql_check = "SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` WHERE `space_list`.`space_sid`";
+$stmt_check = $pdo->query($sql_check);
+$sql = "SELECT * FROM `space_list` JOIN `taiwan_area_number` ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid` WHERE `space_list`.`space_sid`= $search_result";
+$stmt = $pdo->query($sql);
+$r = $stmt->fetch();
 
 if (!empty($_GET['search_sid'])) {
     $search = $_GET['search_sid'];
-    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`sid`= $search");
-
+    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`space_sid`= $search");
     if ($tst->rowCount() > 0) {
         $_SESSION['search'] = $search;
         header('Location: space_search.php');

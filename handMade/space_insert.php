@@ -1,5 +1,5 @@
-    
 <?php
+$page_name = 'space_list_insert';
 require_once __DIR__ . '/space__connect_db.php';
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>

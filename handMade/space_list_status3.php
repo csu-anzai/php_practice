@@ -1,6 +1,7 @@
 <?php
+
 require_once __DIR__ . '/space__connect_db.php';
-$page_name = 'space_list1';
+$page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $t_sql = "SELECT COUNT(1) FROM `space_list` WHERE  `space_list`.`space_status`=1";
 $t_stmt = $pdo->query($t_sql);
@@ -17,7 +18,7 @@ if ($page > $totalPages) {
     exit;
 }
 // $sql = ""
-$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number`  ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid`  WHERE  `space_list`.`space_status`=1   ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
+$sql  =  sprintf("SELECT * FROM `space_list` JOIN `taiwan_area_number`  ON `space_list`.`space_area` = `taiwan_area_number`.`area_sid`  WHERE  `space_list`.`space_status`=0   ORDER BY `space_sid` ASC LIMIT %s,%s", ($page - 1) * $per_page, $per_page);
 $stmt = $pdo->query($sql);
 // $rows = $stmt->fetch();
 // print_r($rows);
@@ -33,7 +34,6 @@ if (!empty($_GET['search_sid'])) {
         exit;
     }
 }
-
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 
@@ -126,7 +126,7 @@ if (!empty($_GET['search_sid'])) {
                 <div class="col">
                     <ul class="pagination  mt-3 justify-content-center">
                         <li class="page-item">
-                            <a class="page-link" style="color: #15141A;"  href="<?= "?page=" . ($page - 1) ?> aria-label="Previous">
+                            <a class="page-link" style="color: #15141A;" href="<?= "?page=" . ($page - 1) ?> aria-label=" Previous">
                                 <span aria-hidden="true">&laquo;</span>
                             </a>
                         </li>
@@ -146,19 +146,19 @@ if (!empty($_GET['search_sid'])) {
                         }
                         for ($i = $p_start; $i <= $p_end; $i++) :
                             ?>
-                            <li class="page-item   <?= $i == $page ? 'active' : '' ?>"><a class="page-link "  style="color: #15141A;" href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
+                            <li class="page-item   <?= $i == $page ? 'active' : '' ?>"><a class="page-link " style="color: #15141A;" href="<?= "?page={$i}" ?>"><?= "{$i}" ?></a></li>
                         <?php endfor; ?>
 
                         <li class="page-item">
-                            <a class="page-link"  style="color: #15141A;"  href="<?= "?page=" . ($page + 1) ?>" aria-label="Next">
+                            <a class="page-link" style="color: #15141A;" href="<?= "?page=" . ($page + 1) ?>" aria-label="Next">
                                 <span aria-hidden="true">&raquo;</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </div>
-            <form class="form-inline" action="space_search.php" method="get" name="form_search">
-                <input class="form-control mr-sm-2" id="search_sid" type="search" placeholder="請輸入商品編號" aria-label="Search" name="search_sid">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="請輸入商品編號" aria-label="Search">
                 <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
@@ -193,7 +193,7 @@ if (!empty($_GET['search_sid'])) {
                                 <div class="card-header" id="headingOne" style="padding:0px;text-align: center;">
                                     <h2 class="mb-0">
                                         <button class="btn btn-link" style="color:#ccc;" type="button" data-toggle="collapse" data-target="#collapse<?= $r['space_sid'] ?>" aria-expanded="false" aria-controls="collapse<?= $r['space_sid'] ?>">
-                                        <?= htmlentities($r['space_name']); ?>
+                                            <?= htmlentities($r['space_name']); ?>
                                         </button>
                                     </h2>
                                 </div>

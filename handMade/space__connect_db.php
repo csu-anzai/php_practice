@@ -1,5 +1,6 @@
 <?php
 // 建立資料庫連線
+session_start();
 try {
     $userDir = getenv('HOME');
     $config = parse_ini_file("$userDir" . DIRECTORY_SEPARATOR . "__connect.ini");

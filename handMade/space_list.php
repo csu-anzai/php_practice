@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once __DIR__ . '/space__connect_db.php';
 $page_name = 'space_list';
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
@@ -24,9 +23,8 @@ $stmt = $pdo->query($sql);
 // print_r($rows);
 
 if (!empty($_GET['search_sid'])) {
-    $search = $_GET['search_sid'];
-    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`sid`= $search");
-
+    // $search = $_GET['search_sid'];
+    $tst = $pdo->query("SELECT COUNT(*) FROM `space_list` WHERE `space_list`.`space_sid`= $search");
     if ($tst->rowCount() > 0) {
         $_SESSION['search'] = $search;
         header('Location: space_search.php');
@@ -34,10 +32,6 @@ if (!empty($_GET['search_sid'])) {
         exit;
     }
 }
-
-
-
-
 ?>
 <?php include __DIR__ . '/space__html_head.php'; ?>
 
